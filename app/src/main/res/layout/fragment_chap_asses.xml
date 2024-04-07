@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kotlin Quiz Chapter 1"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/question1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. What is the correct syntax to output &quot;Hello World&quot; in Kotlin?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Radio buttons for question 1 -->
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioButton1a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="a. println(&quot;Hello World&quot;)"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton1b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="b. print(&quot;Hello World&quot;)"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton1c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="c. output(&quot;Hello World&quot;)"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
+            <!-- Question 2 -->
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. How do you insert COMMENTS in Kotlin code?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Radio buttons for question 2 -->
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioButton2a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="a. /* This is a comment */"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="b. -- This is a comment"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="c. // This is a comment"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
+            <!-- Question 3 -->
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. Which keyword is used to declare a function?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Radio buttons for question 3 -->
+            <RadioGroup
+                android:id="@+id/radioGroup3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioButton3a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="a. fun"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="b. decl"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="c. define"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:layout_marginTop="16dp"
+                    android:background="#00FF00" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

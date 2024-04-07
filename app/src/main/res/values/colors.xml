@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#628bcc</color>
+    <color name="gray">#808080 </color>
+    <color name="green">#00FF00 </color>
+    <color name="red">#FF0000 </color>
+    <color name="light_gray">#D3D3D3</color>
+
+
+
+    <color name="bl">#057DCD </color>
+    <color name="lb">#2298E6 </color>
+
+    <!-- LESSONS PAGE COLORS -->
+    <color name="color_chapter1">#FF5733</color>
+    <color name="color_chapter2">#FFC300</color>
+    <color name="color_chapter3">#C70039</color>
+    <color name="color_chapter4">#900C3F</color>
+    <color name="color_chapter5">#581845</color>
+    <color name="color_get_started">#2E86C1</color>
+
+</resources>

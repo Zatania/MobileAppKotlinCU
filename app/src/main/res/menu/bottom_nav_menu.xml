@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_lesson"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:title="Lesson" />
+
+    <item
+        android:id="@+id/navigation_quiz"
+        android:icon="@drawable/ic_code"
+        android:title="Quiz" />
+
+    <item
+        android:id="@+id/navigation_progress"
+        android:icon="@drawable/baseline_stacked_line_chart_24"
+        android:title="Progress" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_person"
+        android:title="Profile" />
+</menu>

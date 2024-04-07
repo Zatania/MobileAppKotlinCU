@@ -1,0 +1,148 @@
+<resources>
+    <string name="title_home">Home</string>
+    <string name="title_lesson">Lesson</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_progress">Progress</string>
+    <string name="title_quiz">quiz</string>
+    <string name="app_name">Codes Unleash</string>
+    <string name="account_binded">Account Binded</string>
+    <string name="google_sign_in">Google Sign In</string>
+    <string name="kotlin_code"><![CDATA[fun main() {\n
+    // Arithmetic Operators\n
+    val a = 10\n
+    val b = 5\n
+    val sum = a + b\n
+    val difference = a - b\n
+    val product = a * b\n
+    val quotient = a / b\n
+    val remainder = a % b\n\n
+
+    println("Arithmetic Operators:")\n
+    println("Sum: $sum")\n
+    println("Difference: $difference")\n
+    println("Product: $product")\n
+    println("Quotient: $quotient")\n
+    println("Remainder: $remainder")\n
+    println()\n\n
+
+    //  Comparison Operators\n
+    val isEqual = (a == b)\n
+    val isNotEqual = (a != b)\n
+    val isGreaterThan = (a > b)\n
+    val isLessThan = (a < b)\n
+    val isGreaterOrEqual = (a >= b)\n
+    val isLessOrEqual = (a <= b)\n\n
+
+    println("Comparison Operators:")\n
+    println("Is Equal: $isEqual")\n
+    println("Is Not Equal: $isNotEqual")\n
+    println("Is Greater Than: $isGreaterThan")\n
+    println("Is Less Than: $isLessThan")\n
+    println("Is Greater or Equal: $isGreaterOrEqual")\n
+    println("Is Less or Equal: $isLessOrEqual")\n
+    println()\n\n
+
+    // Logical Operators\n
+    val condition1 = true\n
+    val condition2 = false\n
+    val logicalAnd = condition1 && condition2\n\
+    val logicalOr = condition1 || condition2\n
+    val logicalNot = !condition1\n\n
+
+    println("Logical Operators:")\n
+    println("Logical AND: $logicalAnd")\n
+    println("Logical OR: $logicalOr")\n
+    println("Logical NOT: $logicalNot")\n
+    println()\n\n
+
+    // Assignment Operators\n
+    var x = 5\n
+    x += 3\n
+    val y = 8\n
+    x -= y\n\n
+
+    println("Assignment Operators:")\n
+    println("x after += 3: $x")\n
+    println("x after -= y: $x")\n
+    println()\n\n
+
+    //Increment and Decrement Operators\n
+    x = 5\n\n
+
+    // Pre-increment\n
+    ++x\n
+    println("After Pre-increment: $x")\n\n
+
+    // Post-increment\n
+    x++\n
+    println("After Post-increment: $x")\n
+
+    // Post-decrement\n
+    x--\n
+    println("After Post-decrement: $x")\n\n
+
+    // Pre-decrement\n
+    --x\n
+    println("After Pre-decrement: $x")\n\n
+
+    // Range Operator\n
+    val range = 1..5\n\n
+
+    println("Range Operator:")\n
+    println("Range from 1 to 5: $range")\n
+}]]></string>
+
+    <!-- Lessons Page Strings-->
+    <string name="kotlin_title">Kotlin</string>
+    <string name="kotlin_description">Kotlin is a programming language with fixed types that works with JetBrains\' Java Virtual Machine (JVM). It is meant to be simpler, more null-safe, and work with Java. In Kotlin, you can find extension functions, smart casts, and functional programming tools. For effective asynchronous programming in Android development, it is known for offering coroutines. After thinking about it, Kotlin is a popular choice for many uses because it has a modern, expressive structure and features that make code safer and developers more productive.</string>
+
+    <!-- Strings for Chapter 1 -->
+    <string name="chapter1">Chapter 1</string>
+    <string name="lesson1.1">1.1 Kotlin Syntax</string>
+    <string name="lesson1.2">1.2 Printing in Kotlin</string>
+    <string name="lesson1.3">1.3 Annotating Your Code in Kotlin</string>
+    <string name="lesson1.4">1.4 Kotlin Variable Declarations</string>
+    <string name="chap1_assessment">Chapter 1 Assessment</string>
+
+    <!-- Strings for Chapter 2 -->
+    <string name="chapter2">Chapter 2</string>
+    <string name="lesson2.1">2.1 Data Types in Kotlin</string>
+    <string name="lesson2.2">2.2 Operators in Kotlin</string>
+    <string name="lesson2.3">2.3 String Handling in Kotlin</string>
+    <string name="lesson2.4">2.4 Kotlin Boolean</string>
+    <string name="chap2_assessment">Chapter 2 Assessment</string>
+
+    <!-- Strings for Chapter 3 -->
+    <string name="chapter3">Chapter 3</string>
+    <string name="lesson3.1">3.1 Conditional Statements in Kotlin</string>
+    <string name="lesson3.2">3.2 \'When\' Expression</string>
+    <string name="lesson3.3">3.3 While Loop in Kotlin</string>
+    <string name="lesson3.4">3.4 Control Flow with \'Break\' and \'Continue\'</string>
+    <string name="chap3_assessment">Chapter 3 Assessment</string>
+
+    <!-- Strings for Chapter 4 -->
+    <string name="chapter4">Chapter 4</string>
+    <string name="lesson4.1">4.1 Arrays in Kotlin</string>
+    <string name="lesson4.2">4.2 Kotlin For Loop</string>
+    <string name="lesson4.3">4.3 Ranges</string>
+    <string name="lesson4.4">4.4 Functions in Kotlin</string>
+    <string name="chap4_assessment">Chapter 4 Assessment</string>
+
+    <!-- Strings for Chapter 5 -->
+    <string name="chapter5">Chapter 5</string>
+    <string name="lesson5.1">5.1 OOP - Object-Oriented Programming</string>
+    <string name="lesson5.2">5.2 Classes/Objects</string>
+    <string name="lesson5.3">5.3 Constructors</string>
+    <string name="lesson5.4">5.4 Class Function</string>
+    <string name="lesson5.5">5.5 Inheritance</string>
+    <string name="chap5_assessment">Chapter 5 Assessment</string>
+
+    <!-- Other common strings -->
+    <string name="get_started">Getting Started</string>
+
+    <!-- Progress Page Strings -->
+    <string name="progress_title">Lessons Progress</string>
+    <string name="percentage">0%</string>
+    <string name="averageScore">Average Score</string>
+
+</resources>

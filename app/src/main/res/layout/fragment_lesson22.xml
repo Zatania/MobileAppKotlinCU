@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="start|top"
+    android:padding="16dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="2.2 Operators in Kotlin "
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="375dp"
+                android:layout_height="92dp"
+                android:layout_marginTop="16dp"
+                android:text="Operators are symbols or keywords that operate on variables and values in the Kotlin programming language. In a clear and expressive way, they make activities like arithmetic computations, value comparisons, and logical operations possible. \n\n"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/videoCardView"
+                android:layout_width="370dp"
+                android:layout_height="210dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="20dp"
+                app:cardElevation="10dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView28">
+
+                <VideoView
+                    android:id="@+id/videoView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="377dp"
+                android:layout_height="569dp"
+                android:layout_marginTop="16dp"
+                android:text="The following are some typical Kotlin operator symbols, along with a brief description:\n\nArithmetic Operators:\n  +: Addition (e.g., a + b)\n  -: Subtraction (e.g., a - b)\n  *: Multiplication (e.g., a * b)\n  /: Division (e.g., a / b)\n  %: Modulus (returns the remainder after division, e.g., a % b)\n  Comparison Operators:  ==: Equality (e.g., a == b)\n  !=: Inequality (e.g., a != b)\n  &lt;: Less than (e.g., a &lt; b)\n  &gt;: Greater than (e.g., a &gt; b)\n  &lt;=: Less than or equal to (e.g., a &lt;= b)\n  &gt;=: Greater than or equal to (e.g., a &gt;= b)\n\n  Logical Operators:\n  &amp;&amp;: Logical AND (e.g., condition1 &amp;&amp; condition2)\n  ||: Logical OR (e.g., condition1 || condition2)\n  !: Logical NOT (negates a boolean value, e.g., !condition)\n\n  Assignment Operators:\n  =: Assigns a value to a variable (e.g., a = 5)\n  +=, -=, *=, /=, %=: Compound assignment operators (e.g., a += 2 is equivalent to a = a + 2)\n\n  Increment and Decrement Operators:\n  ++: Increment (e.g., a++ or ++a)\n  --: Decrement (e.g., a-- or --a)\n\n  Range Operator:\n  ..: Creates a range of values (e.g., 1..5 represents the range from 1 to 5)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/videoCardView" />
+
+            <TextView
+                android:id="@+id/textView85"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Code Explanation:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView5"
+                android:layout_width="372dp"
+                android:layout_height="1425dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView85"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1530dp">
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="292dp"
+                        android:layout_height="1491dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/kotlin_code"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.218"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Output:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.009"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Arithmetic Operators:\nSum: 15\nDifference: 5\nProduct: 50\nQuotient: 2\nRemainder: 0\n\nComparison Operators:\nIs Equal: false\nIs Not Equal: true\nIs Greater Than: true\nIs Less Than: false\nIs Greater or Equal: true\nIs Less or Equal: false\n\nLogical Operators:\nLogical AND: false\nLogical OR: true\nLogical NOT: false\n\nAssignment Operators:\nx after += 3: 8\nx after -= y: 0\n\nIncrement and Decrement Operators:\nAfter Pre-increment: 6\nAfter Post-increment: 7\nAfter Post-decrement: 6\nAfter Pre-decrement: 5\n\nRange Operator:\nRange from 1 to 5: 1..5\n"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Explanation:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.016"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="376dp"
+                android:layout_height="647dp"
+                android:layout_marginTop="10dp"
+                android:text="Every portion of the accompanying Kotlin code shows how to use various operators.\n\nArithmetic Operators: These operations provide an overview of fundamental mathematical calculations. The sum is the outcome of multiplying variables a and b; the difference is the result of subtracting b from a; the product is the outcome of dividing a by b; and the remainder is the value that remains after the division.\n\nOperators for comparison: These operators assess how variables relate to one another. The &quot;Is Equal&quot; and &quot;Is Not Equal&quot; statements determine whether or not a and b are equal. The comparison of a and b's numbers is evaluated by the &quot;Is Greater Than,&quot; &quot;Is Less Than,&quot; &quot;Is Greater or Equal,&quot; and &quot;Is Less or Equal&quot; statements.\n\nLogical Operators: Boolean values are handled by logical operators. Condition 1 and Condition 2 are combined into the &quot;Logical AND&quot; and &quot;Logical OR&quot; expressions. The &quot;Logical NOT&quot; disproves condition 1's validity.  Operators for assignments: These operators change the values of variables. Using the += operator, x is first increased by 3; subsequently, x is decreased by the value of y (8) using the -= operator.\n\nOperators with increment and decrement: These operators change a variable's value. count is increased by 1 at first, and the result is given the new count value following additional incrementation.\n\nOperator: A series of values is defined by the range operator (..). It stands for the inclusive range of 1 to 5 in this instance.\n\nEach section's output shows the outcomes of these operations, giving a thorough rundown of the several ways that Kotlin operators are used for calculations and assessments.  "
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.125"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView56"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</ScrollView>

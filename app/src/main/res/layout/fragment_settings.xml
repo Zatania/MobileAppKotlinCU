@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.settings.settings">
+
+    <!-- Title for Terms and Policy -->
+    <TextView
+        android:id="@+id/termsPolicyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms and Policy"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Terms of Service Dropdown -->
+    <TextView
+        android:id="@+id/termsOfServiceDropdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border"
+        android:padding="12dp"
+        android:text="Terms of Service"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsPolicyTitle" />
+
+    <!-- Accepting Terms Title -->
+    <TextView
+        android:id="@+id/AcceptingTermsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="68dp"
+        android:clickable="true"
+        android:drawableStart="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawableLeft="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawablePadding="8dp"
+        android:text="Accepting Terms"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsPolicyTitle"
+        app:layout_goneMarginTop="5dp" />
+
+    <!-- Accepting Terms Content -->
+    <TextView
+        android:id="@+id/AcceptingTermsContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Accepting the Terms \n\nBy using the Codes Unleash mobile application, you acknowledge and agree to comply with the terms and conditions outlined in the application. These terms include, but are not limited to: \n\nUsage Agreement: You agree to use the Codes Unleash application for educational purposes only. The application is designed to facilitate learning and skill sharing among users in the field of programming languages, particularly Kotlin. \n\nUser Conduct: Users are expected to maintain respectful and ethical behavior while interacting within the application. Discriminatory, offensive, or inappropriate content, including but not limited to hate speech, harassment, or any form of abuse, is strictly prohibited.\n\nData Privacy: Codes Unleash prioritizes user data privacy and security. Personal information collected by the application is handled in accordance with the privacy policy. Users have the right to control and manage their data as outlined in the privacy policy.\n\nIntellectual Property: All content, including but not limited to code snippets, tutorials, articles, and any user-generated content, remains the property of the respective creators. Users are encouraged to respect intellectual property rights and give proper credit when using or sharing content.\n\nLiability: Codes Unleash and its affiliates are not liable for any damages, losses, or issues arising from the use of the application. Users are responsible for their actions and interactions within the platform.\n\n"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:background="@drawable/border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AcceptingTermsTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Your Account Title -->
+    <TextView
+        android:id="@+id/YourAccTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="120dp"
+        android:clickable="true"
+        android:drawableStart="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawableLeft="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawablePadding="8dp"
+        android:text="Your Account With Us"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsPolicyTitle"
+        app:layout_goneMarginTop="10dp" />
+
+    <!-- Your Account Content -->
+    <TextView
+        android:id="@+id/YourAccContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:text="Your Account With Us \n\nThank you for choosing our platform! Creating an account with us allows you to unlock a world of possibilities:\n\n1. Personalization: Tailor your experience by customizing your profile, preferences, and settings. Make the platform truly yours.\n\n2. Access to Features: Gain access to exclusive features such as saving your favorite tutorials, bookmarking content, and interacting with our community.\n\n3. Learning Progress: Track your learning progress, view your history, and continue from where you left off across devices.\n\n4. Community Engagement: Join discussions, share your insights, and collaborate with other learners and experts in the programming community.\n\n5. Support and Updates: Stay updated with the latest platform enhancements, content additions, and receive support from our dedicated team.\n\nCreate your account today and dive into the world of programming knowledge and skill-building!"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/YourAccTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Privacy Dropdown -->
+    <TextView
+        android:id="@+id/PrivacyDropdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="196dp"
+        android:background="@drawable/border"
+        android:padding="12dp"
+        android:text="Privacy Policy"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsPolicyTitle" />
+
+    <!-- Privacy Title -->
+    <TextView
+        android:id="@+id/PrivacyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="268dp"
+        android:clickable="true"
+        android:drawableStart="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawableLeft="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawablePadding="8dp"
+        android:text="Privacy Policy"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsPolicyTitle"
+        app:layout_goneMarginTop="5dp" />
+
+    <!-- Privacy Content -->
+    <TextView
+        android:id="@+id/PrivacyContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy\n\nOur platform prioritizes the protection of your privacy. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information. By using our services, you agree to the terms outlined in this policy.\n\n1. Information Collection: We may collect personal information, including but not limited to, your name, email address, and preferences, to provide and improve our services.\n\n2. Usage Data: We may collect information about how you interact with our platform, including device information, log data, and cookies, to analyze and enhance your user experience.\n\n3. Information Use: The information collected is used to provide and personalize our services, communicate with you, improve our offerings, and ensure the security of our platform.\n\n4. Information Sharing: We do not sell or share your personal information with third parties unless necessary for providing our services or as required by law.\n\n5. Data Security: We employ industry-standard security measures to protect your information from unauthorized access, misuse, or alteration.\n\n6. User Control: You have the right to access, update, or delete your personal information. You can manage your privacy settings through your account settings.\n\n7. Policy Changes: This Privacy Policy may be updated periodically. We will notify you about significant changes and provide the updated policy on our platform.\n\nIt is important to review and understand our Privacy Policy. By continuing to use our platform, you signify your acceptance of this policy and any updates.\n"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:background="@drawable/border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/PrivacyTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Commitment Title -->
+    <TextView
+        android:id="@+id/CommitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="312dp"
+        android:clickable="true"
+        android:drawableStart="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawableLeft="@drawable/baseline_keyboard_arrow_down_24"
+        android:drawablePadding="8dp"
+        android:text="Our Commitment to Users"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsPolicyTitle"
+        app:layout_goneMarginTop="5dp" />
+
+    <!-- Commitment Content -->
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CommitTitle"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/CommitContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:overScrollMode="ifContentScrolls"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:text="Our Commitment to Users \n\nAt Codes Unleash, we are dedicated to ensuring a safe and rewarding experience for our users. Our commitment revolves around the following principles:\n\n1. User Privacy Protection: We prioritize safeguarding your privacy by implementing robust security measures and adhering to strict data protection practices.\n\n2. Transparent Practices: We believe in transparent communication and will provide clear information regarding how your data is collected, used, and managed.\n\n3. User Empowerment: We aim to empower our users by providing them with control over their personal information. You have the right to manage your preferences and data.\n\n4. Data Security: We employ industry-standard security protocols to prevent unauthorized access, misuse, or alteration of your information.\n\n5. Quality Service: We strive to offer high-quality services while ensuring your safety and security throughout your interactions with our platform.\n\n6. Continuous Improvement: We are committed to continually improving our platform's security, privacy features, and user experience based on user feedback and evolving best practices.\n\nWe value the trust you place in us and are dedicated to upholding these commitments to protect and respect your rights and privacy.\n\n"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

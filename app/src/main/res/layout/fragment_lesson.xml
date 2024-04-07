@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:textAlignment="textStart">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:textAlignment="textStart">
+
+        <TextView
+            android:id="@+id/ProgL"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/kotlin_title"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textColor="@color/bl"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/kotlin_description"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/GetStarted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/get_started"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lb" />
+
+        <!-- Chapter 1 -->
+        <Button
+            android:id="@+id/c1button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/chapter1"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lb" />
+
+        <LinearLayout
+            android:id="@+id/chapter1Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:textAlignment="textStart"
+            android:visibility="gone">
+
+            <!-- Chapter 1 lessons -->
+            <Button
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson1.1"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:clickable="false"
+                android:text="@string/lesson1.2"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:clickable="false"
+                android:text="@string/lesson1.3"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:clickable="false"
+                android:text="@string/lesson1.4"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/chapAsses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:clickable="false"
+                android:text="@string/chap1_assessment"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <!-- Chapter 2 -->
+        <Button
+            android:id="@+id/c2button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/chapter2"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lb"
+            android:clickable="false" />
+
+        <LinearLayout
+            android:id="@+id/chapter2Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:textAlignment="textStart"
+            android:visibility="gone">
+
+            <!-- Chapter 2 lessons -->
+            <Button
+                android:id="@+id/l21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson2.1"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson2.2"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson2.3"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson2.4"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/chap2Asses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/chap2_assessment"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <!-- Chapter 3 -->
+        <Button
+            android:id="@+id/c3button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/chapter3"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lb"
+            android:clickable="false" />
+
+        <LinearLayout
+            android:id="@+id/chapter3Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:textAlignment="textStart"
+            android:visibility="gone">
+
+            <!-- Chapter 3 lessons -->
+            <Button
+                android:id="@+id/l31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson3.1"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson3.2"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson3.3"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l34"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson3.4"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/chap3Asses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/chap3_assessment"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <!-- Chapter 4 -->
+        <Button
+            android:id="@+id/c4button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/chapter4"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lb"
+            android:clickable="false" />
+
+        <LinearLayout
+            android:id="@+id/chapter4Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:textAlignment="textStart"
+            android:visibility="gone">
+
+            <!-- Chapter 4 lessons -->
+            <Button
+                android:id="@+id/l41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson4.1"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+
+            <Button
+                android:id="@+id/l42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson4.2"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson4.3"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson4.4"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/chap4Asses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/chap4_assessment"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <!-- Chapter 5 -->
+        <Button
+            android:id="@+id/c5button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/chapter5"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lb"
+            android:clickable="false" />
+
+        <LinearLayout
+            android:id="@+id/chapter5Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:textAlignment="textStart"
+            android:visibility="gone">
+
+            <!-- Chapter 5 lessons -->
+            <Button
+                android:id="@+id/l51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson5.1"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson5.2"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l53"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson5.3"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l54"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson5.4"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/l55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/lesson5.5"
+                android:textAlignment="textStart"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/chap5Asses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/lb"
+                android:text="@string/chap5_assessment"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

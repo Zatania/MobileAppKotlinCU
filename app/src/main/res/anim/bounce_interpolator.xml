@@ -1,0 +1,3 @@
+<!-- res/anim/bounce_interpolator.xml -->
+<interpolator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/bounce_interpolator" />
