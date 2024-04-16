@@ -76,7 +76,8 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/badgesTitle">
+            android:layout_below="@id/badgesTitle"
+            android:layout_marginTop="25dp">
 
             <LinearLayout
                 android:id="@+id/badgesContainer"
@@ -90,48 +91,8 @@
                     android:id="@+id/badge1"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:src="@drawable/badge"
-                    android:layout_marginEnd="8dp"/>
-
-                <!-- Example Badge -->
-                <ImageView
-                    android:id="@+id/badge2"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/badge"
-                    android:layout_marginEnd="8dp"/>
-
-                <!-- Example Badge -->
-                <ImageView
-                    android:id="@+id/badge3"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/badge"
-                    android:layout_marginEnd="8dp"/>
-
-                <!-- Example Badge -->
-                <ImageView
-                    android:id="@+id/badge4"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/badge"
-                    android:layout_marginEnd="8dp"/>
-
-                <!-- Example Badge -->
-                <ImageView
-                    android:id="@+id/badge5"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/badge"
-                    android:layout_marginEnd="8dp"/>
-
-                <!-- Example Badge -->
-                <ImageView
-                    android:id="@+id/badge6"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/badge"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/badge" />
 
                 <!-- Add more badges here -->
 

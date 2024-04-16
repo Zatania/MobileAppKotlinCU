@@ -4,28 +4,27 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/navigation_home">
 
+    <!-- Home Fragment -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.nav.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
-
         <action
-            android:id="@+id/action_homeFragment_to_lessonFragment"
+            android:id="@+id/action_navigation_home_to_navigation_lesson"
             app:destination="@id/navigation_lesson" />
     </fragment>
 
+    <!-- Main Quiz Fragment -->
     <fragment
         android:id="@+id/navigation_quiz"
         android:name="com.example.nav.ui.quiz.eval"
         tools:layout="@layout/fragment_eval">
-
         <action
-            android:id="@+id/action_evalFragment_to_Chapter"
+            android:id="@+id/action_navigation_quiz_to_ChapterFragment"
             app:destination="@id/ChapterFragment" />
         <action
-            android:id="@+id/action_evalFragment_to_Exam"
+            android:id="@+id/action_navigation_quiz_to_ExamFragment"
             app:destination="@id/ExamFragment" />
-
     </fragment>
 
     <fragment
@@ -39,54 +38,16 @@
         android:id="@+id/ChapterFragment"
         android:name="com.example.nav.ui.quiz.Chapter"
         tools:layout="@layout/fragment_chapter" >
-
         <action
-            android:id="@+id/action_chapterFragment_to_chapterAsses"
-            app:destination="@id/chapAsses" />
-
-        <action
-            android:id="@+id/action_chapterFragment_to_chapter2Asses"
-            app:destination="@id/chap2Asses" />
-
-        <action
-            android:id="@+id/action_chapterFragment_to_chapter3Asses"
-            app:destination="@id/chap3Asses" />
-
-        <action
-            android:id="@+id/action_chapterFragment_to_chapter4Asses"
-            app:destination="@id/chap4Asses" />
-
-        <action
-            android:id="@+id/action_chapterFragment_to_chapter5Asses"
-            app:destination="@id/chap5Asses" />
-
-
+            android:id="@+id/action_ChapterFragment_to_button1"
+            app:destination="@id/ChapterAssessment" />
     </fragment>
 
-    <!-- Define assessment fragments -->
+    <!-- Define Chapter Assessment fragments -->
     <fragment
-        android:id="@+id/button1"
-        android:name="com.example.nav.ui.lesson.chapAsses"
+        android:id="@+id/navigation_chapter_assessment"
+        android:name="com.example.nav.ui.lesson.ChapterAssessment"
         tools:layout="@layout/fragment_chap_asses" />
-
-    <fragment
-        android:id="@+id/button2"
-        android:name="com.example.nav.ui.lesson.chap2Asses"
-        tools:layout="@layout/fragment_chap2_asses" />
-    <fragment
-        android:id="@+id/button3"
-        android:name="com.example.nav.ui.lesson.chap3Asses"
-        tools:layout="@layout/fragment_chap3_asses" />
-
-    <fragment
-        android:id="@+id/button4"
-        android:name="com.example.nav.ui.lesson.chap4Asses"
-        tools:layout="@layout/fragment_chap4_asses" />
-
-    <fragment
-        android:id="@+id/button5"
-        android:name="com.example.nav.ui.lesson.chap2Asses"
-        tools:layout="@layout/fragment_chap5_asses" />
 
 
     <!-- Progress Fragment -->
@@ -94,191 +55,16 @@
         android:id="@+id/navigation_progress"
         android:name="com.example.nav.ui.progress.ProgressFragment"
         tools:layout="@layout/fragment_progress">
-
         <action
-            android:id="@+id/action_ProgressFragment_to_GStart"
-            app:destination="@id/GStartFragment" />
-
-        <action
-            android:id="@+id/action_progressFragment_to_lesson11"
-            app:destination="@id/lessonFragment11" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson12"
-            app:destination="@id/lessonFragment12" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson13"
-            app:destination="@id/lessonFragment13" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson14"
-            app:destination="@id/lessonFragment14" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson21"
-            app:destination="@id/lessonFragment21" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson22"
-            app:destination="@id/lessonFragment22" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson23"
-            app:destination="@id/lessonFragment23" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson24"
-            app:destination="@id/lessonFragment24" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson31"
-            app:destination="@id/lessonFragment31" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson32"
-            app:destination="@id/lessonFragment32" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson33"
-            app:destination="@id/lessonFragment33" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson34"
-            app:destination="@id/lessonFragment34" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson41"
-            app:destination="@id/lessonFragment41" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson42"
-            app:destination="@id/lessonFragment42" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson43"
-            app:destination="@id/lessonFragment43" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson44"
-            app:destination="@id/lessonFragment44" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson51"
-            app:destination="@id/lessonFragment51" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson52"
-            app:destination="@id/lessonFragment52" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson53"
-            app:destination="@id/lessonFragment53" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson54"
-            app:destination="@id/lessonFragment54" />
-        <action
-            android:id="@+id/action_progressFragment_to_lesson55"
-            app:destination="@id/lessonFragment55" />
+            android:id="@+id/action_navigation_progress_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
-
-
-    <fragment
-        android:id="@+id/lessonFragment11"
-        android:name="com.example.nav.ui.lesson.lesson11"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment12"
-        android:name="com.example.nav.ui.lesson.lesson12"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment13"
-        android:name="com.example.nav.ui.lesson.lesson13"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment14"
-        android:name="com.example.nav.ui.lesson.lesson14"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment21"
-        android:name="com.example.nav.ui.lesson.Lesson21"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment22"
-        android:name="com.example.nav.ui.lesson.Lesson22"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment23"
-        android:name="com.example.nav.ui.lesson.Lesson23"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment24"
-        android:name="com.example.nav.ui.lesson.Lesson24"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment31"
-        android:name="com.example.nav.ui.lesson.Lesson31"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment32"
-        android:name="com.example.nav.ui.lesson.Lesson32"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment33"
-        android:name="com.example.nav.ui.lesson.Lesson33"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment34"
-        android:name="com.example.nav.ui.lesson.Lesson34"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment41"
-        android:name="com.example.nav.ui.lesson.Lesson41"
-        tools:layout="@layout/fragment_lesson" />
-
-    <fragment
-        android:id="@+id/lessonFragment42"
-        android:name="com.example.nav.ui.lesson.Lesson42"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment43"
-        android:name="com.example.nav.ui.lesson.Lesson43"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment44"
-        android:name="com.example.nav.ui.lesson.Lesson44"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment51"
-        android:name="com.example.nav.ui.lesson.Lesson51"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment52"
-        android:name="com.example.nav.ui.lesson.Lesson52"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment53"
-        android:name="com.example.nav.ui.lesson.Lesson53"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment54"
-        android:name="com.example.nav.ui.lesson.Lesson54"
-        tools:layout="@layout/fragment_lesson" />
-    <fragment
-        android:id="@+id/lessonFragment55"
-        android:name="com.example.nav.ui.lesson.Lesson55"
-        tools:layout="@layout/fragment_lesson" />
-
 
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.nav.ui.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile">
-
-        <action
-            android:id="@+id/action_profileFragment_to_examFragment"
-            app:destination="@id/ExamFragment" />
-
-        <action
-            android:id="@+id/action_profileFragment_to_lessonFragment"
-            app:destination="@id/navigation_lesson" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/examFragment"
-        android:name="com.example.nav.ui.quiz.Exam"
-        tools:layout="@layout/fragment_exam" />
-
+        tools:layout="@layout/fragment_profile"/>
 
 
     <!-- Lesson Fragment -->
@@ -286,356 +72,30 @@
         android:id="@+id/navigation_lesson"
         android:name="com.example.nav.ui.lesson.LessonFragment"
         tools:layout="@layout/fragment_lesson">
-
-        <!-- Actions related to LessonFragment -->
         <action
-            android:id="@+id/action_LessonFragment_to_GStart"
-            app:destination="@id/GStartFragment" />
-
+            android:id="@+id/action_navigation_lesson_to_navigation_progress"
+            app:destination="@id/navigation_progress" />
         <action
-            android:id="@+id/action_LessonFragment_to_lesson11"
-            app:destination="@id/lesson11Fragment" />
-
+            android:id="@+id/action_navigation_lesson_to_navigation_getting_started"
+            app:destination="@id/navigation_getting_started" />
         <action
-            android:id="@+id/action_LessonFragment_to_lesson12"
-            app:destination="@id/lesson12Fragment" />
-
+            android:id="@+id/action_navigation_lesson_to_navigation_lesson_view"
+            app:destination="@id/navigation_lesson_view" />
         <action
-            android:id="@+id/action_LessonFragment_to_lesson13"
-            app:destination="@id/lesson13Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson14"
-            app:destination="@id/lesson14Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_chapAsses"
-            app:destination="@id/chapAsses" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson21"
-            app:destination="@id/lesson21Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson22"
-            app:destination="@id/lesson22Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson23"
-            app:destination="@id/lesson23Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson24"
-            app:destination="@id/lesson24Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_chap2Asses"
-            app:destination="@id/chap2Asses" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson31"
-            app:destination="@id/lesson31Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson32"
-            app:destination="@id/lesson32Fragment" />
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson33"
-            app:destination="@id/lesson33Fragment" />
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson34"
-            app:destination="@id/lesson34Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_chap3Asses"
-            app:destination="@id/chap3Asses" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson41"
-            app:destination="@id/lesson41Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson42"
-            app:destination="@id/lesson42Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson43"
-            app:destination="@id/lesson43Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson44"
-            app:destination="@id/lesson44Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_chap4Asses"
-            app:destination="@id/chap4Asses" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson51"
-            app:destination="@id/lesson51Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson52"
-            app:destination="@id/lesson52Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson53"
-            app:destination="@id/lesson53Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson54"
-            app:destination="@id/lesson54Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_lesson55"
-            app:destination="@id/lesson55Fragment" />
-
-        <action
-            android:id="@+id/action_LessonFragment_to_chap5Asses"
-            app:destination="@id/chap5Asses" />
-
-
-
+            android:id="@+id/action_navigation_lesson_to_ChapterAssessment"
+            app:destination="@id/ChapterAssessment" />
     </fragment>
 
+    <!-- View Lesson Activity -->
     <fragment
-        android:id="@+id/GStartFragment"
-        android:name="com.example.nav.ui.lesson.GStart">
+        android:id="@+id/navigation_lesson_view"
+        android:name="com.example.nav.ui.lesson.LessonViewFragment"
+        tools:layout="@layout/fragment_lesson_view"/>
 
-        <action
-            android:id="@+id/action_GStartFragment_to_lesson11"
-            app:destination="@id/lesson11Fragment" />
-    </fragment>
-
+    <!-- Getting Started Fragment -->
     <fragment
-        android:id="@+id/lesson11Fragment"
-        android:name="com.example.nav.ui.lesson.lesson11">
-
-        <action
-            android:id="@+id/action_lesson11_to_lesson12"
-            app:destination="@id/lesson12Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson12Fragment"
-        android:name="com.example.nav.ui.lesson.lesson12">
-
-        <action
-            android:id="@+id/action_lesson12_to_lesson13"
-            app:destination="@id/lesson13Fragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson13Fragment"
-        android:name="com.example.nav.ui.lesson.lesson13" >
-
-        <action
-            android:id="@+id/action_lesson13_to_lesson14"
-            app:destination="@id/lesson14Fragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson14Fragment"
-        android:name="com.example.nav.ui.lesson.lesson14">
-
-        <action
-            android:id="@+id/action_lesson14_to_ChapAsses"
-            app:destination="@id/chapAsses" />
-
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/chapAsses"
-        android:name="com.example.nav.ui.lesson.chapAsses">
-
-        <action
-            android:id="@+id/action_chapAsses_to_lesson21"
-            app:destination="@id/lesson21Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson21Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson21">
-        <action
-            android:id="@+id/action_lesson21_to_lesson22"
-            app:destination="@id/lesson22Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson22Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson22">
-        <action
-            android:id="@+id/action_lesson22_to_lesson23"
-            app:destination="@id/lesson23Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson23Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson23">
-        <action
-            android:id="@+id/action_lesson23_to_lesson24"
-            app:destination="@id/lesson24Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson24Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson24">
-        <action
-            android:id="@+id/action_lesson24_to_Chap2Asses"
-            app:destination="@id/chap2Asses" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/chap2Asses"
-        android:name="com.example.nav.ui.lesson.chap2Asses">
-
-        <action
-            android:id="@+id/action_chap2Asses_to_lesson31"
-            app:destination="@id/lesson31Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson31Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson31">
-        <action
-            android:id="@+id/action_lesson31_to_lesson32"
-            app:destination="@id/lesson32Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson32Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson32">
-
-        <action
-            android:id="@+id/action_lesson32_to_lesson33"
-            app:destination="@id/lesson33Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson33Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson33">
-
-        <action
-            android:id="@+id/action_lesson33_to_lesson34"
-            app:destination="@id/lesson34Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson34Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson34">
-
-        <action
-            android:id="@+id/action_lesson34_to_chap3Asses"
-            app:destination="@id/chap3Asses" />
-    </fragment>
-    <fragment
-        android:id="@+id/chap3Asses"
-        android:name="com.example.nav.ui.lesson.chap3Asses">
-
-        <action
-            android:id="@+id/action_chap3Asses_to_lesson41"
-            app:destination="@id/lesson41Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson41Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson41">
-
-        <action
-            android:id="@+id/action_lesson41_to_lesson42"
-            app:destination="@id/lesson42Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson42Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson42">
-
-        <action
-            android:id="@+id/action_lesson42_to_lesson43"
-            app:destination="@id/lesson43Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson43Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson43">
-
-        <action
-            android:id="@+id/action_lesson43_to_lesson44"
-            app:destination="@id/lesson44Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/lesson44Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson44">
-
-        <action
-            android:id="@+id/action_lesson44_to_chap4Asses"
-            app:destination="@id/chap4Asses" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/chap4Asses"
-        android:name="com.example.nav.ui.lesson.chap4Asses">
-
-        <action
-            android:id="@+id/action_chap4Asses_to_lesson51"
-            app:destination="@id/lesson51Fragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/lesson51Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson51">
-
-        <action
-            android:id="@+id/action_lesson51_to_lesson52"
-            app:destination="@id/lesson52Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/lesson52Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson52">
-
-        <action
-            android:id="@+id/action_lesson52_to_lesson53"
-            app:destination="@id/lesson53Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/lesson53Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson53">
-
-        <action
-            android:id="@+id/action_lesson53_to_lesson54"
-            app:destination="@id/lesson54Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/lesson54Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson54">
-
-        <action
-            android:id="@+id/action_lesson54_to_lesson55"
-            app:destination="@id/lesson55Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/lesson55Fragment"
-        android:name="com.example.nav.ui.lesson.Lesson55">
-        <action
-            android:id="@+id/action_lesson55_to_chap5Asses"
-            app:destination="@id/chap5Asses" />
-    </fragment>
-    <fragment
-        android:id="@+id/chap5Asses"
-        android:name="com.example.nav.ui.lesson.chap5Asses" />
-
+        android:id="@+id/navigation_getting_started"
+        android:name="com.example.nav.ui.getting_started.GettingStartedFragment"
+        tools:layout="@layout/fragment_getting_started"/>
 
 </navigation>

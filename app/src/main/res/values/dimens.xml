@@ -4,5 +4,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="fragment_horizontal_margin">16dp</dimen>
     <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="badge_image_width">96dp</dimen>
+    <dimen name="badge_width">96dp</dimen>
+    <dimen name="badge_height">96dp</dimen>
+    <dimen name="badge_margin_end">8dp</dimen>
+    <dimen name="lessons_margin_bottom">16dp</dimen>
+    <dimen name="lessons_padding">16dp</dimen>
 
 </resources>

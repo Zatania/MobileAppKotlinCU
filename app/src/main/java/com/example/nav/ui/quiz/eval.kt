@@ -31,12 +31,12 @@ class eval : Fragment() {
 
         // Set click listeners for buttons
         buttonStartExercise.setOnClickListener {
-            findNavController().navigate(R.id.action_evalFragment_to_Chapter)
+            findNavController().navigate(R.id.fragment_chapterAssessments)
         }
 
 
         buttonStartExam.setOnClickListener {
-                findNavController().navigate(R.id.action_evalFragment_to_Exam)
+                findNavController().navigate(R.id.fragment_exam)
             }
 
         }

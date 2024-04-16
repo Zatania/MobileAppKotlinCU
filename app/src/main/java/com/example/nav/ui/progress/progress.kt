@@ -51,49 +51,7 @@ class ProgressFragment : Fragment() {
         val lastOpenedChapter = sharedPreferences.getInt(lastOpenedChapterKey, 1)
         val lastOpenedLesson = sharedPreferences.getInt(lastOpenedLessonKey, 1)
 
-        findNavController().navigate(getLessonId(chapter, lastOpenedLesson))
-    }
-
-    private fun getLessonId(chapter: Int, lesson: Int): Int {
-        return when (chapter) {
-            1 -> when (lesson) {
-                1 -> R.id.action_progressFragment_to_lesson11
-                2 -> R.id.action_progressFragment_to_lesson12
-                3 -> R.id.action_progressFragment_to_lesson13
-                4 -> R.id.action_progressFragment_to_lesson14
-                else -> R.id.action_progressFragment_to_lesson11
-            }
-            2 -> when (lesson) {
-                1 -> R.id.action_progressFragment_to_lesson21
-                2 -> R.id.action_progressFragment_to_lesson22
-                3 -> R.id.action_progressFragment_to_lesson23
-                4 -> R.id.action_progressFragment_to_lesson24
-                else -> R.id.action_progressFragment_to_lesson21
-            }
-            3 -> when (lesson) {
-                1 -> R.id.action_progressFragment_to_lesson31
-                2 -> R.id.action_progressFragment_to_lesson32
-                3 -> R.id.action_progressFragment_to_lesson33
-                4 -> R.id.action_progressFragment_to_lesson34
-                else -> R.id.action_progressFragment_to_lesson31
-            }
-            4 -> when (lesson) {
-                1 -> R.id.action_progressFragment_to_lesson41
-                2 -> R.id.action_progressFragment_to_lesson42
-                3 -> R.id.action_progressFragment_to_lesson43
-                4 -> R.id.action_progressFragment_to_lesson44
-                else -> R.id.action_progressFragment_to_lesson41
-            }
-            5 -> when (lesson) {
-                1 -> R.id.action_progressFragment_to_lesson51
-                2 -> R.id.action_progressFragment_to_lesson52
-                3 -> R.id.action_progressFragment_to_lesson53
-                4 -> R.id.action_progressFragment_to_lesson54
-                5 -> R.id.action_progressFragment_to_lesson55
-                else -> R.id.action_progressFragment_to_lesson51
-            }
-            else -> R.id.action_progressFragment_to_lesson11
-        }
+        //findNavController().navigate()
     }
 
     private fun updateChapterProgress(progressBar: ProgressBar, chapter: Int) {

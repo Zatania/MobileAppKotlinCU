@@ -24,34 +24,6 @@ class Chapter : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_chapter, container, false)
 
-        // Initialize buttons
-        val button1 = view.findViewById<Button>(R.id.button1)
-        val button2 = view.findViewById<Button>(R.id.button2)
-        val button3 = view.findViewById<Button>(R.id.button3)
-        val button4 = view.findViewById<Button>(R.id.button4)
-        val button5 = view.findViewById<Button>(R.id.button5)
-
-        // Set click listeners for buttons
-        button1.setOnClickListener {
-            findNavController().navigate(R.id.action_chapterFragment_to_chapterAsses)
-        }
-
-        button2.setOnClickListener {
-            findNavController().navigate(R.id.action_chapterFragment_to_chapter2Asses)
-        }
-
-        button3.setOnClickListener {
-            findNavController().navigate(R.id.action_chapterFragment_to_chapter3Asses)
-        }
-
-        button4.setOnClickListener {
-            findNavController().navigate(R.id.action_chapterFragment_to_chapter4Asses)
-        }
-
-        button5.setOnClickListener {
-            findNavController().navigate(R.id.action_chapterFragment_to_chapter5Asses)
-        }
-
         return view
     }
 

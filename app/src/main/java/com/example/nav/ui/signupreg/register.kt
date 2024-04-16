@@ -2,7 +2,6 @@ package com.example.nav.ui.signupreg
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -21,7 +20,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
-import com.example.nav.MainActivity
 import com.example.nav.R
 import com.example.nav.services.RetrofitClient
 import com.example.nav.ui.login.LoginActivity
@@ -329,6 +327,4 @@ class RegisterActivity : AppCompatActivity() {
         // Move cursor to the end of the text
         confirmPasswordEditText.setSelection(confirmPasswordEditText.text.length)
     }
-
-    fun togglePasswordVisibility(view: View) {}
 }

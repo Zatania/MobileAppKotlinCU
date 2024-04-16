@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.annotation:annotation:1.7.1")
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -59,14 +60,21 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation ("com.google.android.material:material:1.11.0")
     implementation ("com.google.android.gms:play-services-auth:21.0.0")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("com.squareup.okhttp3:logging-interceptor:3.10.0")
-    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.4.0")
-    implementation ("com.intuit.ssp:ssp-android:1.0.6") // For ssp
-    implementation ("com.intuit.sdp:sdp-android:1.0.6") // For sdp
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.11.0")
+    //SSP
+    implementation ("com.intuit.ssp:ssp-android:1.1.1") // For ssp
+    //PinView
     implementation ("io.github.chaosleung:pinview:1.4.4")
+    //Picasso
+    implementation ("com.squareup.picasso:picasso:2.71828")
+    //Exo Player
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.media3:media3-exoplayer-dash:1.3.1")
+    implementation("androidx.media3:media3-ui:1.3.1")
 }
 
 

@@ -7,33 +7,33 @@
     android:textAlignment="textStart">
 
     <LinearLayout
-        android:id="@+id/mainLayout"
+        android:id="@+id/lessonsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="20dp"
         android:textAlignment="textStart">
 
         <TextView
-            android:id="@+id/ProgL"
-            android:layout_width="381dp"
+            android:id="@+id/languageNameTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/kotlin_title"
-            android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Display4"
             android:textColor="@color/bl"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/desc"
+            android:id="@+id/descriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/kotlin_description"
-            android:textAlignment="textStart"
+            android:textAlignment="gravity"
             android:textColor="#000000"
+            android:textDirection="ltr"
             android:textSize="16sp" />
 
         <Button
@@ -41,10 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/lb"
             android:text="@string/get_started"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/lb" />
+            android:textAllCaps="false" />
 
         <!-- Chapter 1 -->
         <Button
@@ -52,10 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/lb"
             android:text="@string/chapter1"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/lb" />
+            android:textAllCaps="false" />
 
         <LinearLayout
             android:id="@+id/chapter1Layout"
@@ -130,11 +130,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/lb"
+            android:clickable="false"
             android:text="@string/chapter2"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/lb"
-            android:clickable="false" />
+            android:textAllCaps="false" />
 
         <LinearLayout
             android:id="@+id/chapter2Layout"
@@ -204,11 +204,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/lb"
+            android:clickable="false"
             android:text="@string/chapter3"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/lb"
-            android:clickable="false" />
+            android:textAllCaps="false" />
 
         <LinearLayout
             android:id="@+id/chapter3Layout"
@@ -278,11 +278,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/lb"
+            android:clickable="false"
             android:text="@string/chapter4"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/lb"
-            android:clickable="false" />
+            android:textAllCaps="false" />
 
         <LinearLayout
             android:id="@+id/chapter4Layout"
@@ -353,11 +353,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/lb"
+            android:clickable="false"
             android:text="@string/chapter5"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/lb"
-            android:clickable="false" />
+            android:textAllCaps="false" />
 
         <LinearLayout
             android:id="@+id/chapter5Layout"
@@ -427,7 +427,7 @@
                 android:backgroundTint="@color/lb"
                 android:text="@string/chap5_assessment"
                 android:textAlignment="textStart"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
