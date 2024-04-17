@@ -17,7 +17,7 @@
     <!-- Main Quiz Fragment -->
     <fragment
         android:id="@+id/navigation_quiz"
-        android:name="com.example.nav.ui.quiz.eval"
+        android:name="com.example.nav.ui.quiz.EvaluationPage"
         tools:layout="@layout/fragment_eval">
         <action
             android:id="@+id/action_navigation_quiz_to_ChapterFragment"

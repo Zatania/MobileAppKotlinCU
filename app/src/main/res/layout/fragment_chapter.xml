@@ -13,18 +13,19 @@
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/mainLayout"
-            android:fitsSystemWindows="true"
+            android:id="@+id/chapterContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="30dp">
 
 
             <TextView
                 android:id="@+id/textView104"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="Unlock Chapters with us!"
                 android:textColor="#2196F3"
                 android:textSize="24sp" />
@@ -33,50 +34,57 @@
                 android:id="@+id/textView105"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="Congratulations on reaching the chapter assessment stage! Your journey through the chapters has led you to this pivotal moment, where your understanding will be put to the test. But fear not, for completing these assessments will unlock further chapters and unveil more lessons for you to explore and conquer."
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/ChapterAssessment"
+            <LinearLayout
+                android:id="@+id/buttonContainer"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="8dp"
-                android:text="Chapter 1 Assessment"
-                android:textAllCaps="false" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:text="Chapter 2 Assessment"
-                android:textAllCaps="false" />
+                <Button
+                    android:id="@+id/ChapterAssessment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Chapter 1 Assessment"
+                    android:textAllCaps="false" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:text="Chapter 3 Assessment"
-                android:textAllCaps="false" />
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Chapter 2 Assessment"
+                    android:textAllCaps="false" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:text="Chapter 4 Assessment"
-                android:textAllCaps="false" />
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Chapter 3 Assessment"
+                    android:textAllCaps="false" />
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:text="Chapter 5 Assessment"
-                android:textAllCaps="false" />
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Chapter 4 Assessment"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Chapter 5 Assessment"
+                    android:textAllCaps="false" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

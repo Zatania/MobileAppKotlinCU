@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.VideoView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.example.nav.R
@@ -20,7 +22,7 @@ import com.google.gson.reflect.TypeToken
 class LessonViewFragment : Fragment() {
     private lateinit var viewLessonContainer: ViewGroup
     private lateinit var binding: FragmentLessonViewBinding
-    private lateinit var videoWebView: WebView
+    private lateinit var videoView: WebView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,8 +56,14 @@ class LessonViewFragment : Fragment() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadVideo(videoUrl: String) {
-        videoWebView = binding.root.findViewById(R.id.videoWebView)
-        videoWebView.settings.javaScriptEnabled = true
-        videoWebView.loadUrl(videoUrl)
+        videoView = binding.root.findViewById(R.id.videoView)
+        videoView.settings.javaScriptEnabled = true
+        videoView.settings.loadWithOverviewMode = true
+        videoView.settings.useWideViewPort = true
+        videoView.settings.builtInZoomControls = true
+        videoView.settings.displayZoomControls = false
+        videoView.webChromeClient = WebChromeClient()
+        videoView.webViewClient = WebViewClient()
+        videoView.loadUrl(videoUrl)
     }
 }

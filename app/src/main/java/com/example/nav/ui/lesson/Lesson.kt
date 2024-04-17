@@ -173,64 +173,86 @@ class LessonFragment : Fragment() {
                         addView(chapterLayout)
                     }
 
+
+
                     // Set up chapter button and layout
                     if (chapterButton != null) {
                         if (chapterLayout != null) {
                             setupChapterButton(chapterButton, chapterLayout)
-                        }
-                    }
-                    for(lesson in chapter.lessons){
-                        val lessonButton = context?.let {
-                            MaterialButton(it).apply {
-                                text = lesson.lesson_number + " " + lesson.lesson_title
-                                textSize = 16f
-                                setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
-                                isAllCaps = false
-                                textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                                layoutParams = LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT
-                                )
-                                (layoutParams as LinearLayout.LayoutParams).setMargins(0, 0, 0, resources.getDimensionPixelSize(R.dimen.lessons_margin_bottom))
-                                setOnClickListener {
-                                    animateButtonClick(this)
-                                    this.postDelayed({
-                                        val gson = Gson()
-                                        val lessonJSon = gson.toJson(lesson)
-                                        Log.d("LessonFragment", "Lesson data: $lessonJSon")
-                                        setFragmentResult("lessonResultKey", bundleOf("lessonData" to lessonJSon))
-                                        findNavController().navigate(R.id.navigation_lesson_view)
-                                    }, 200)
-                                }
-                            }
-                        }
-                        chapterLayout?.addView(lessonButton)
-                    }
-                    val chapterAssessmentButton = context?.let {
-                        MaterialButton(it).apply {
-                            text = chapter.chapter_name + " Assessment"
-                            textSize = 16f
-                            setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
-                            isAllCaps = false
-                            textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                            layoutParams = LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                            )
-                            (layoutParams as LinearLayout.LayoutParams).setMargins(0, 0, 0, resources.getDimensionPixelSize(R.dimen.lessons_margin_bottom))
-                            setOnClickListener {
-                                animateButtonClick(this)
-                                this.postDelayed({
-                                    val gson = Gson()
-                                    val chapterJson = gson.toJson(chapter)
 
-                                    setFragmentResult("chapterResultKey", bundleOf("chapterData" to chapterJson))
-                                    findNavController().navigate(R.id.navigation_chapter_assessment)
-                                }, 200)
+
+                            for(lesson in chapter.lessons){
+                                val lessonButton = context?.let {
+                                    MaterialButton(it).apply {
+                                        text = lesson.lesson_number + " " + lesson.lesson_title
+                                        textSize = 16f
+                                        setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
+                                        isAllCaps = false
+                                        textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                                        layoutParams = LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
+                                        )
+                                        (layoutParams as LinearLayout.LayoutParams).setMargins(0, 0, 0, resources.getDimensionPixelSize(R.dimen.lessons_margin_bottom))
+                                        setOnClickListener {
+                                            animateButtonClick(this)
+                                            this.postDelayed({
+                                                val gson = Gson()
+                                                val lessonJSon = gson.toJson(lesson)
+                                                Log.d("LessonFragment", "Lesson data: $lessonJSon")
+                                                setFragmentResult("lessonResultKey", bundleOf("lessonData" to lessonJSon))
+                                                findNavController().navigate(R.id.navigation_lesson_view)
+                                            }, 200)
+                                        }
+                                    }
+                                }
+                                chapterLayout?.addView(lessonButton)
+                            }
+
+                            // Check if chapter assessments exist
+                            if (chapter.chapter_assessment.isNotEmpty()) {
+                                // Add chapter assessment button
+                                val chapterAssessmentButton = context?.let {
+                                    MaterialButton(it).apply {
+                                        text = chapter.chapter_name + " Assessment"
+                                        textSize = 16f
+                                        setBackgroundColor(
+                                            ContextCompat.getColor(
+                                                context,
+                                                R.color.lb
+                                            )
+                                        )
+                                        isAllCaps = false
+                                        textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                                        layoutParams = LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
+                                        )
+                                        (layoutParams as LinearLayout.LayoutParams).setMargins(
+                                            0,
+                                            0,
+                                            0,
+                                            resources.getDimensionPixelSize(R.dimen.lessons_margin_bottom)
+                                        )
+                                        setOnClickListener {
+                                            animateButtonClick(this)
+                                            this.postDelayed({
+                                                val gson = Gson()
+                                                val chapterJson = gson.toJson(chapter)
+                                                Log.d("LessonFragment", "Chapter data: $chapterJson")
+                                                setFragmentResult(
+                                                    "chapterResultKey",
+                                                    bundleOf("chapterData" to chapterJson)
+                                                )
+                                                findNavController().navigate(R.id.navigation_chapter_assessment)
+                                            }, 200)
+                                        }
+                                    }
+                                }
+                                chapterLayout.addView(chapterAssessmentButton)
                             }
                         }
                     }
-                    chapterLayout?.addView(chapterAssessmentButton)
                 }
             }
         }

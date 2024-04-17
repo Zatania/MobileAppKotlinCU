@@ -31,6 +31,17 @@ data class Badge(
     val badge_image: String
 )
 
+data class ChapterAssessmentResponseMain(
+    val message: String,
+    val results: List<ChapterAssessmentResponse>,
+    val code: Int,
+    val error: Boolean
+)
+data class ChapterAssessmentResponse(
+    val chapter: String,
+    val chapter_assessment: List<ChapterAssessment>
+)
+
 data class ProgrammingLanguage(
     val id: Int,
     val programming_language: String,

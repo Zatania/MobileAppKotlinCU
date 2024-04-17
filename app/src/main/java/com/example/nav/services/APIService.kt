@@ -52,4 +52,19 @@ interface APIService {
         @Header("Authorization") token: String,
         @Body requestBody: JsonObject
     )
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress-exam/create")
+    suspend fun createProgressExam(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    )
+
+    @Headers("Content-Type: application/json")
+    @GET("chapter_assessment")
+    suspend fun getChapterAssessment(
+        @Header("Authorization") token: String
+    ) : Response<ChapterAssessmentResponseMain>
+
+
 }

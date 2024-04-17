@@ -73,6 +73,7 @@
             android:src="@drawable/ic_visibility_off"
             app:layout_constraintEnd_toEndOf="@+id/logpass"
             app:layout_constraintTop_toTopOf="@+id/logpass" />
+
         <Button
             android:id="@+id/logbut"
             android:layout_width="340sp"
@@ -111,13 +112,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt"
             app:layout_constraintVertical_bias="0.102" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="36dp" />
 
         <ImageView
             android:id="@+id/imageView2"

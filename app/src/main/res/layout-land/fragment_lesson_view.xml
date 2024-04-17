@@ -36,14 +36,14 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="16dp">
 
             <WebView
-                android:id="@+id/videoWebView"
+                android:id="@+id/videoView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"/>
+                android:layout_height="150dp" />
+
         </androidx.cardview.widget.CardView>
 
         <TextView

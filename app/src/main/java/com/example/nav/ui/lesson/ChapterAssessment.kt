@@ -35,8 +35,8 @@ class ChapterAssessment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLessonViewBinding.inflate(inflater, container, false)
-        chapAssContainer = binding.viewLessonContainer
+        val rootView = inflater.inflate(R.layout.fragment_chap_asses, container, false)
+        chapAssContainer = rootView.findViewById(R.id.chapAssContainer)
 
         setFragmentResultListener("chapterResultKey") { _, bundle ->
             val chapJSON = bundle.getString("chapterData")
@@ -45,7 +45,7 @@ class ChapterAssessment : Fragment() {
             // Now you have the lessonData, you can use it as needed
             displayAssessment(chapData)
         }
-        return binding.root
+        return rootView
     }
 
     @SuppressLint("SetTextI18n")
@@ -55,7 +55,7 @@ class ChapterAssessment : Fragment() {
         val chapAssTitle = context?.let {
             MaterialTextView(it).apply {
                 text = chapAss.chapter_name + " Assessment"
-                textSize = 20f
+                textSize = 24f
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
                 setTextColor(ContextCompat.getColor(context, R.color.bl))
                 setTypeface(null, android.graphics.Typeface.BOLD)
@@ -79,7 +79,7 @@ class ChapterAssessment : Fragment() {
             // Create TextView for the question
             val questionTextView = context?.let {
                 MaterialTextView(it).apply {
-                    text = "$(question.question_number). $(question.question)"
+                    text = question.question_number.toString() + " " + question.question
                     textSize = 16f
                     textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                     layoutParams = LinearLayout.LayoutParams(
