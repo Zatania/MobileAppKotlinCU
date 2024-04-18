@@ -145,3 +145,15 @@ data class Progress(
 data class LessonID (
     val next_lesson_id: Int
 )
+
+data class ChapterID (
+    val next_chapter_id: Int
+)
+
+data class LastLessonID (
+    val last_lesson_id: Int
+)
+
+data class FirstLessonID (
+    val first_lesson_id: Int
+)

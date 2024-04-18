@@ -100,4 +100,25 @@ interface APIService {
         @Header("Authorization") token: String,
         @Body requestBody: JsonObject
     ) : Response<LessonID>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress/getChapterID")
+    suspend fun getNextChapterId(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<ChapterID>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress/getLastLessonID")
+    suspend fun getLastLessonId(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<LastLessonID>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress/getFirstLessonID")
+    suspend fun getFirstLessonID(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<FirstLessonID>
 }

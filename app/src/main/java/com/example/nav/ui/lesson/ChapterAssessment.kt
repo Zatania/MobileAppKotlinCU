@@ -158,6 +158,7 @@ class ChapterAssessment : Fragment() {
         var score = 0 // Initialize score
         val totalQuestions = chapter.chapter_assessment.size
         val chapName = chapter.chapter_name
+        val chapID = chapter.id
 
         // Iterate through each question
         for (question in chapter.chapter_assessment) {
@@ -172,26 +173,85 @@ class ChapterAssessment : Fragment() {
         val percentageScore = (score.toFloat() / totalQuestions.toFloat()) * 100
 
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val username = sharedPreferences.getString("username", "")
+        val userID = sharedPreferences.getInt("id", 0)
         val token = sharedPreferences.getString("token", "")
 
         lifecycleScope.launch {
             val requestBody = JsonObject().apply {
-                addProperty("username", username)
-                addProperty("chap_ref", chapter.reference_number)
+                addProperty("chapter_id", chapID)
+                addProperty("user_id", userID)
                 addProperty("score", score)
             }
             RetrofitClient.instance.createProgress("Bearer $token", requestBody)
         }
 
-        Toast.makeText(requireContext(), "Assessment submitted!", Toast.LENGTH_SHORT).show()
+        if (percentageScore >= 70) {
+            Toast.makeText(requireContext(), "Congratulations! You passed the assessment!", Toast.LENGTH_SHORT).show()
+            lifecycleScope.launch {
+                val requestBody = JsonObject().apply {
+                    addProperty("chapter_id", chapID)
+                }
+                val response = RetrofitClient.instance.getNextChapterId("Bearer $token", requestBody)
 
-        Toast.makeText(requireContext(), "Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
+                val nextChapterID = response.body()?.next_chapter_id
 
-        println("Score for Chapter $chap_reference_number: $score / $totalQuestions (${percentageScore}% correct)")
+                if (response.isSuccessful && nextChapterID != null) {
+                    val requestBodyLesson = JsonObject().apply {
+                        addProperty("chapter_id", nextChapterID)
+                    }
 
-        selectedChoices.clear()
+                    val responseLesson = RetrofitClient.instance.getFirstLessonID("Bearer $token", requestBodyLesson)
 
-        findNavController().navigate(R.id.navigation_lesson)
+                    val firstLessonID = responseLesson.body()?.first_lesson_id
+
+                    if (responseLesson.isSuccessful && firstLessonID != null) {
+                        val requestBodyProgress = JsonObject().apply {
+                            addProperty("user_id", userID)
+                            addProperty("completion_status", "inprogress")
+                            addProperty("lesson_id", firstLessonID)
+                            addProperty("chapter_id", nextChapterID)
+                        }
+                        val responseProgress = RetrofitClient.instance.createProgress(
+                            "Bearer $token",
+                            requestBodyProgress
+                        )
+
+                        if (responseProgress.isSuccessful) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Congratulations! You have completed the chapter. You can now proceed to the next chapter.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to fetch last lesson", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch next chapter", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            Toast.makeText(requireContext(), "Assessment submitted!", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(requireContext(), "Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
+
+            println("Score for Chapter $chap_reference_number: $score / $totalQuestions (${percentageScore}% correct)")
+
+            selectedChoices.clear()
+
+            findNavController().navigate(R.id.navigation_lesson)
+        } else {
+            Toast.makeText(requireContext(), "Sorry, you did not pass the assessment. Please try again.", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(requireContext(), "Assessment submitted!", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(requireContext(), "Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
+
+            println("Score for Chapter $chap_reference_number: $score / $totalQuestions (${percentageScore}% correct)")
+
+            selectedChoices.clear()
+
+            findNavController().navigate(R.id.navigation_lesson)
+        }
     }
 }
