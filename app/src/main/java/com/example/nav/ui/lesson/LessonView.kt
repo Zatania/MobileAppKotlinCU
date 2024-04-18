@@ -1,6 +1,7 @@
 package com.example.nav.ui.lesson
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,20 +10,30 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.VideoView
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.nav.R
 import com.example.nav.databinding.FragmentLessonViewBinding
 import com.example.nav.services.Lesson
+import com.example.nav.services.RetrofitClient
+import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.launch
 
 
 class LessonViewFragment : Fragment() {
     private lateinit var viewLessonContainer: ViewGroup
     private lateinit var binding: FragmentLessonViewBinding
     private lateinit var videoView: WebView
+    private lateinit var token: String
+    private var user_id: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,11 +41,14 @@ class LessonViewFragment : Fragment() {
         binding = FragmentLessonViewBinding.inflate(inflater, container, false)
         viewLessonContainer = binding.viewLessonContainer
 
+        val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        token = sharedPreferences.getString("token", "") ?: ""
+        user_id = sharedPreferences.getInt("id", 0)
+
         setFragmentResultListener("lessonResultKey") { _, bundle ->
             val lessonJson = bundle.getString("lessonData")
             val lessonData = Gson().fromJson<Lesson>(lessonJson, object : TypeToken<Lesson>() {}.type)
 
-            Log.d("LessonViewFragment", "Lesson data: $lessonData")
             // Now you have the lessonData, you can use it as needed
             displayLesson(lessonData)
         }
@@ -52,6 +66,62 @@ class LessonViewFragment : Fragment() {
         if (lesson.lesson_video.isNotEmpty()) {
             loadVideo(lesson.lesson_video)
         }
+
+        val doneButton = context?.let {
+            MaterialButton(it).apply {
+                text = "Done with Getting Started"
+                textSize = 12f
+                isEnabled = true
+                setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
+                isAllCaps = false
+                textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                layoutParams = LinearLayout.LayoutParams(
+                    resources.getDimensionPixelSize(R.dimen.done_button_width),
+                    resources.getDimensionPixelSize(R.dimen.done_button_height)
+                )
+                (layoutParams as LinearLayout.LayoutParams).setMargins(0, resources.getDimensionPixelSize(R.dimen.button_margin_top), 0, 0)
+                setOnClickListener {
+                    lifecycleScope.launch {
+                        try {
+                            val requestBodyNext = JsonObject().apply {
+                                addProperty("chapter_id", lesson.chapter_id)
+                                addProperty("lesson_id", lesson.id)
+                            }
+                            val response = RetrofitClient.instance.getNextLessonId("Bearer $token", requestBodyNext)
+                            if (response.isSuccessful) {
+                                val nextLessonId = response.body()?.next_lesson_id
+                                if (nextLessonId != null) {
+                                    val requestBody = JsonObject().apply {
+                                        addProperty("user_id", user_id)
+                                        addProperty("completion_status", "inprogress")
+                                        addProperty("lesson_id", nextLessonId)
+                                        addProperty("chapter_id", lesson.chapter_id)
+                                    }
+                                    val responseFinal = RetrofitClient.instance.createProgress("Bearer $token", requestBody)
+
+                                    if (responseFinal.isSuccessful) {
+                                        // Handle success
+                                        Toast.makeText(context, "Lesson done. You can now proceed to next lesson.", Toast.LENGTH_SHORT).show()
+                                        findNavController().navigate(R.id.navigation_lesson)
+                                    } else {
+                                        // Handle error
+                                    }
+                                } else {
+                                    Toast.makeText(context, "No next lesson found", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(context, "Failed to fetch next lesson", Toast.LENGTH_SHORT).show()
+                            }
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                            Log.e("LessonViewFragment", "Error fetching next lesson: ${e.message}", e)
+                        }
+                    }
+                }
+            }
+        }
+
+        binding.viewLessonContainer.addView(doneButton)
     }
 
     @SuppressLint("SetJavaScriptEnabled")

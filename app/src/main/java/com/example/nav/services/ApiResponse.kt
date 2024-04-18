@@ -47,16 +47,17 @@ data class ProgrammingLanguage(
     val programming_language: String,
     val description: String,
     val reference_number: String,
-    val getting_started: List<Steps>,
+    val getting_started: List<GettingStarted>,
     val exams: List<Exam>,
     val chapters: List<Chapter>
 )
 
-data class Steps(
+data class GettingStarted(
     val steps: List<StepsDetails>
 )
 
 data class StepsDetails(
+    val id: Int,
     val getting_started_id: Int,
     val name: String,
     val description: String,
@@ -65,6 +66,7 @@ data class StepsDetails(
 )
 
 data class Exam(
+    val id: Int,
     val reference_number: String,
     val programming_language_id: Int,
     val question_number: Int,
@@ -76,7 +78,9 @@ data class Exam(
     val choice_4: String,
     val correct_answer: Int
 )
+
 data class Chapter(
+    val id: Int,
     val chapter_name: String,
     val reference_number: String,
     val lessons: List<Lesson>,
@@ -84,6 +88,7 @@ data class Chapter(
 )
 
 data class Lesson(
+    val id: Int,
     val reference_number: String,
     val chapter_id: Int,
     val lesson_number: String,
@@ -96,6 +101,7 @@ data class Lesson(
 )
 
 data class ChapterAssessment(
+    val id: Int,
     val reference_number: String,
     val chapter_id: Int,
     val question_number: Int,
@@ -106,4 +112,36 @@ data class ChapterAssessment(
     val choice_3: String,
     val choice_4: String,
     val correct_answer: Int
+)
+
+
+data class ChapterData(
+    val id: Int,
+    val chapter_name: String,
+    val lessons: List<LessonData>
+)
+
+data class LessonData(
+    val id: Int,
+    val chapter_id: Int,
+    val lesson_number: String,
+    val lesson_title: String
+)
+
+data class ChaptersData(
+    val chapters: List<ChapterData>
+)
+
+data class Progress(
+    val id: Int,
+    val user_id: Int,
+    val chapter_id: Int,
+    val lesson_id: Int,
+    val assessment_id: Int?,
+    val completion_status: String,
+    val score: Double?
+)
+
+data class LessonID (
+    val next_lesson_id: Int
 )

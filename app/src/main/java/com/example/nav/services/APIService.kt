@@ -1,12 +1,17 @@
 package com.example.nav.services
 
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface APIService {
@@ -46,19 +51,6 @@ interface APIService {
         @Header("Authorization") token: String
     ): Response<List<ProgrammingLanguage>>
 
-    @Headers("Content-Type: application/json")
-    @POST("user/progress-chapter-assessment/create")
-    suspend fun createProgressChapterAssessment(
-        @Header("Authorization") token: String,
-        @Body requestBody: JsonObject
-    )
-
-    @Headers("Content-Type: application/json")
-    @POST("user/progress-exam/create")
-    suspend fun createProgressExam(
-        @Header("Authorization") token: String,
-        @Body requestBody: JsonObject
-    )
 
     @Headers("Content-Type: application/json")
     @GET("chapter_assessment")
@@ -66,5 +58,46 @@ interface APIService {
         @Header("Authorization") token: String
     ) : Response<ChapterAssessmentResponseMain>
 
+    @Headers("Content-Type: application/json")
+    @Multipart
+    @POST("user/upload/{username}")
+    suspend fun uploadImage(
+        @Header("Authorization") token: String,
+        @Path("username") username: String,
+        @Part image: MultipartBody.Part
+    ) : Response<ApiResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("user/profile/{username}")
+    suspend fun getProfile(
+        @Header("Authorization") token: String,
+        @Path("username") username: String,
+    ) : Response<ResponseBody>
+
+    @Headers("Content-Type: application/json")
+    @GET("user/fetch/inprogress")
+    suspend fun getInProgress(
+        @Header("Authorization") token: String,
+    ) : Response<List<Progress>>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("programming-language/fetch")
+    suspend fun fetchData(
+        @Header("Authorization") token: String,
+    ) : Response<ChaptersData>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress/create")
+    suspend fun createProgress(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<ResponseBody>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress/getLessonID")
+    suspend fun getNextLessonId(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<LessonID>
 }

@@ -1,24 +1,41 @@
 package com.example.nav.ui.getting_started
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.nav.R
+import com.example.nav.services.ChapterData
+import com.example.nav.services.ChaptersData
+import com.example.nav.services.Lesson
+import com.example.nav.services.RetrofitClient
 import com.example.nav.services.StepsDetails
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 class GettingStartedFragment : Fragment() {
     private lateinit var gettingStartedContainer: ViewGroup
+    private lateinit var token: String
+    private var user_id: Int = 0
+    private var ChapterID: Int = 0
+    private var LessonID: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,12 +46,33 @@ class GettingStartedFragment : Fragment() {
         gettingStartedContainer = root.findViewById(R.id.gettingStartedContainer)
         gettingStartedContainer.removeAllViews()
 
+        val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        token = sharedPreferences.getString("token", "") ?: ""
+        user_id = sharedPreferences.getInt("id", 0)
         setFragmentResultListener("gettingStartedResultKey") { _, bundle ->
             val stepsJson = bundle.getString("stepsData")
             val stepsData = Gson().fromJson<List<StepsDetails>>(stepsJson, object : TypeToken<List<StepsDetails>>() {}.type)
 
             // Now you have the stepsData, you can use it as needed
             displaySteps(stepsData)
+        }
+
+        setFragmentResultListener("chaptersLessonsIDAndName") { _, bundle ->
+            val chapterJson = bundle.getString("fetchData")
+            val chapterData = Gson().fromJson<ChaptersData>(chapterJson, object : TypeToken<ChaptersData>() {}.type)
+            Log.d("GettingStartedFragment", "Chapter data: $chapterData")
+            val chapter1 = chapterData.chapters.find { chapter: ChapterData ->
+                chapter.chapter_name == "Chapter 1"
+            }
+            Log.d("GettingStartedFragment", "Chapter 1: $chapter1")
+            chapter1?.let { chapter ->
+                // Find the lesson with number "1.1"
+                val lesson1_1 = chapter.lessons.find { it.lesson_number == "1.1" }
+                lesson1_1?.let { lesson ->
+                    ChapterID = chapter.id
+                    LessonID = lesson.id
+                }
+            }
         }
         return root
     }
@@ -121,5 +159,41 @@ class GettingStartedFragment : Fragment() {
                 addView(stepImageView)
             }
         }
+
+        val doneButton = context?.let {
+            MaterialButton(it).apply {
+                text = "Done with Getting Started"
+                textSize = 12f
+                isEnabled = true
+                setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
+                isAllCaps = false
+                textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                layoutParams = LinearLayout.LayoutParams(
+                    resources.getDimensionPixelSize(R.dimen.done_button_width),
+                    resources.getDimensionPixelSize(R.dimen.done_button_height)
+                )
+                (layoutParams as LinearLayout.LayoutParams).setMargins(0, resources.getDimensionPixelSize(R.dimen.button_margin_top), 0, 0)
+                setOnClickListener {
+                    lifecycleScope.launch {
+                        val requestBody = JsonObject().apply {
+                            addProperty("user_id", user_id)
+                            addProperty("chapter_id", ChapterID)
+                            addProperty("lesson_id", LessonID)
+                            addProperty("completion_status", "inprogress")
+                        }
+                        val response = RetrofitClient.instance.createProgress("Bearer $token", requestBody)
+                        if (response.isSuccessful) {
+                            // Handle success
+                            Toast.makeText(context, "Getting Started done. You can now proceed to Chapter 1.", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.navigation_lesson)
+                        } else {
+                            // Handle error
+                        }
+                    }
+                }
+            }
+        }
+
+        gettingStartedContainer.addView(doneButton)
     }
 }

@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         if (loginResponse != null) {
                             // Login successful
                             // Save token and other user data to SharedPreferences for persistence
-                            saveUserData(loginResponse.results.token, loginResponse.results.username, loginResponse.results.email)
+                            saveUserData(loginResponse.results.id, loginResponse.results.token, loginResponse.results.username, loginResponse.results.email)
                             startMainActivity()
                         } else {
                             // Handle null response
@@ -99,10 +99,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveUserData(token: String, username: String, email: String) {
+    private fun saveUserData(id: Int, token: String, username: String, email: String) {
         // Save token to SharedPreferences
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+        editor.putInt("id", id)
         editor.putString("token", token)
         editor.putString("username", username)
         editor.putString("email", email)

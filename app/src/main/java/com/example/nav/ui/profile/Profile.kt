@@ -1,11 +1,18 @@
 package com.example.nav.ui.profile
 
+import android.R.attr
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
+import android.os.FileUtils
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,18 +20,33 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.util.Util
 import com.example.nav.R
 import com.example.nav.services.BadgesResponse
 import com.example.nav.services.RetrofitClient
 import com.example.nav.ui.screen.screen
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+
 
 class ProfileFragment : Fragment() {
     private lateinit var imageView: ImageView
     private lateinit var badgesContainer: ViewGroup
+    private lateinit var username: String
+    private lateinit var token: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +57,8 @@ class ProfileFragment : Fragment() {
 
         // Retrieve saved user data
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val username = sharedPreferences.getString("username", "") ?: ""
-        val token = sharedPreferences.getString("token", "") ?: ""
+        username = sharedPreferences.getString("username", "") ?: ""
+        token = sharedPreferences.getString("token", "") ?: ""
         val email = sharedPreferences.getString("email", "") ?: ""
 
         // Set username and email to TextViews
@@ -63,6 +85,14 @@ class ProfileFragment : Fragment() {
         }
         
         imageView = view.findViewById(R.id.imageView)
+        lifecycleScope.launch {
+            val response = RetrofitClient.instance.getProfile("Bearer $token",username)
+
+            if(response.isSuccessful){
+                val profile = response.body()?.string()
+                Picasso.get().load(profile).into(imageView)
+            }
+        }
         imageView.setOnClickListener {
             openImageSelectionDialog()
         }
@@ -117,24 +147,49 @@ class ProfileFragment : Fragment() {
         startActivity(browserIntent)
     }
 
+    @SuppressLint("IntentReset")
     private fun openImageSelectionDialog() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type = "image/*"
+            addCategory(Intent.CATEGORY_OPENABLE)
+        }
+        startActivityForResult(intent, Companion.REQUEST_IMAGE_OPEN)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == GALLERY_REQUEST_CODE) {
-                data?.data?.let { uri ->
-                    imageView.setImageURI(uri)
+        if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
+            val fileUri = data?.data
+            Toast.makeText(requireContext(), "Image selected: $fileUri", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun uploadFile(file: File) {
+        lifecycleScope.launch {
+            try {
+                val requestFile: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                val body: MultipartBody.Part = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+                // Upload the file using Retrofit
+                val response = RetrofitClient.instance.uploadImage("Bearer $token", username, body)
+
+                // Handle response
+                if (response.isSuccessful) {
+                    // File uploaded successfully
+                    Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
+                    // Reload profile image or handle UI update
+                } else {
+                    // Handle error
+                    Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+                    Log.d("ProfileFragment", "Failed to upload image: ${response.errorBody()?.string()}")
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
     companion object {
-        private const val GALLERY_REQUEST_CODE = 100
+        const val REQUEST_IMAGE_OPEN = 1
     }
+
 }

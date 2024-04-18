@@ -11,5 +11,8 @@
     <dimen name="lessons_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="submit_margin_top">8dp</dimen>
+    <dimen name="done_button_width">100dp</dimen>
+    <dimen name="done_button_height">40dp</dimen>
+    <dimen name="button_margin_top">24dp</dimen>
 
 </resources>

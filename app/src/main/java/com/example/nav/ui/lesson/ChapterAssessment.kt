@@ -181,7 +181,7 @@ class ChapterAssessment : Fragment() {
                 addProperty("chap_ref", chapter.reference_number)
                 addProperty("score", score)
             }
-            RetrofitClient.instance.createProgressChapterAssessment("Bearer $token", requestBody)
+            RetrofitClient.instance.createProgress("Bearer $token", requestBody)
         }
 
         Toast.makeText(requireContext(), "Assessment submitted!", Toast.LENGTH_SHORT).show()

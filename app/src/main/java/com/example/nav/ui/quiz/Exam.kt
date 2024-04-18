@@ -203,7 +203,7 @@ class Exam : Fragment() {
                             addProperty("username", username)
                             addProperty("score", score)
                         }
-                        RetrofitClient.instance.createProgressExam("Bearer $token", requestBody)
+                        RetrofitClient.instance.createProgress("Bearer $token", requestBody)
                     }
 
                     Toast.makeText(requireContext(), "Exam submitted!", Toast.LENGTH_SHORT).show()
