@@ -157,3 +157,12 @@ data class LastLessonID (
 data class FirstLessonID (
     val first_lesson_id: Int
 )
+
+data class ProgressUser (
+    val chapter_name: String,
+    val total_lessons: Int,
+    val completed_lessons: Int,
+    val average_score: Float,
+    val total_items: Int,
+    val last_attempt: String
+)

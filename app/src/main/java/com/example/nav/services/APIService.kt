@@ -121,4 +121,11 @@ interface APIService {
         @Header("Authorization") token: String,
         @Body requestBody: JsonObject
     ) : Response<FirstLessonID>
+
+    @Headers("Content-Type: application/json")
+    @GET("user/progress/{username}")
+    suspend fun getProgress(
+        @Header("Authorization") token: String,
+        @Path("username") username: String
+    ) : Response<List<ProgressUser>>
 }

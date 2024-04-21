@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/progressLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -13,7 +14,9 @@
         tools:context=".ui.progress.ProgressFragment">
 
         <!-- Progress Section -->
+
         <LinearLayout
+            android:id="@+id/progressContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -369,7 +372,9 @@
         </LinearLayout>
 
         <!-- Details Section -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scoreContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -379,7 +384,7 @@
                 android:id="@+id/textViewDetailsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/averageScore"
+                android:text="Chapter 1 Score"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/bl"
