@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebViewFragment
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat

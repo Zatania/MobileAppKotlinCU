@@ -57,7 +57,7 @@ class OTPActivity : AppCompatActivity() {
                                     if (loginResponse != null) {
                                         // Login successful
                                         // Save token and other user data to SharedPreferences for persistence
-                                        saveUserData(loginResponse.results.token, loginResponse.results.username, loginResponse.results.email)
+                                        saveUserData(loginResponse.results.token, loginResponse.results.username, loginResponse.results.email, loginResponse.results.id)
                                         // Add welcome badge
                                         addWelcomeBadge(loginResponse.results.token, loginResponse.results.username)
                                         startMainActivity()
@@ -99,13 +99,14 @@ class OTPActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveUserData(token: String, username: String, email: String) {
+    private fun saveUserData(token: String, username: String, email: String, user_id: Int) {
         // Save token to SharedPreferences
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("token", token)
         editor.putString("username", username)
         editor.putString("email", email)
+        editor.putInt("id", user_id)
         editor.apply()
     }
 

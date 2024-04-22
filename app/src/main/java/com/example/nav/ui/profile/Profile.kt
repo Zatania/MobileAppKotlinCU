@@ -94,8 +94,14 @@ class ProfileFragment : Fragment() {
 
             if(response.isSuccessful){
                 val profile = response.body()?.string()
-                Picasso.get().load(profile).into(profileView)
+                if(!profile.isNullOrEmpty()){ // Check if profile is not empty
+                    Picasso.get().load(profile).into(profileView)
+                } else {
+                    // Load a default image when profile URL is empty
+                    Picasso.get().load("https://www.gravatar.com/avatar/").into(profileView)
+                }
             } else {
+                // Load a default image when the response is not successful
                 Picasso.get().load("https://www.gravatar.com/avatar/").into(profileView)
             }
         }

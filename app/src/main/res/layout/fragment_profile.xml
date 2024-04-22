@@ -1,133 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ui.profile.ProfileFragment">
+    android:fillViewport="true">
 
-    <!-- Profile Header -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- Profile Image Circle -->
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:scaleType="centerCrop"
-            android:focusable="true" />
-
-        <!-- Username -->
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageView"
-            android:layout_centerHorizontal="true"
-            android:text="Username"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp" />
-
-        <!-- Email -->
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView2"
-            android:layout_centerHorizontal="true"
-            android:text="Sample@gmail.com"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp" />
-
-    </RelativeLayout>
-
-    <!-- Line between email and badges title -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Badges Section -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <!-- Badges Title -->
-        <TextView
-            android:id="@+id/badgesTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Badges"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true" />
-
-        <!-- HorizontalScrollView for Badges -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/badgesTitle"
-            android:layout_marginTop="25dp">
-
-            <LinearLayout
-                android:id="@+id/badgesContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Place your badges here dynamically -->
-                <!-- Example Badge -->
-                <ImageView
-                    android:id="@+id/badge1"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/badge" />
-
-                <!-- Add more badges here -->
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-    </RelativeLayout>
-
-    <!-- Feedback and Logout Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="bottom"
-        android:layout_weight="1">
+        android:padding="16dp"
+        tools:context=".ui.profile.ProfileFragment">
 
-        <!-- Feedback Button -->
-        <Button
-            android:id="@+id/button"
+        <!-- Profile Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Profile Image Circle -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                android:focusable="true" />
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView"
+                android:layout_centerHorizontal="true"
+                android:text="Username"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp" />
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView2"
+                android:layout_centerHorizontal="true"
+                android:text="Sample@gmail.com"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+        </RelativeLayout>
+
+        <!-- Line between email and badges title -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Badges Section -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Feedback"
-            android:textAllCaps="false"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="16dp">
 
-        <!-- Logout Button -->
-        <Button
-            android:id="@+id/button6"
+            <!-- Badges Title -->
+            <TextView
+                android:id="@+id/badgesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Badges"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true" />
+
+            <!-- HorizontalScrollView for Badges -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/badgesTitle"
+                android:layout_marginTop="25dp">
+
+                <LinearLayout
+                    android:id="@+id/badgesContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Place your badges here dynamically -->
+                    <!-- Example Badge -->
+                    <ImageView
+                        android:id="@+id/badge1"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/badge" />
+
+                    <!-- Add more badges here -->
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+        <!-- Feedback and Logout Buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textAllCaps="false"
-            android:layout_marginTop="8dp" />
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:layout_weight="1">
+
+            <!-- Feedback Button -->
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feedback"
+                android:textAllCaps="false"
+                android:layout_marginTop="24dp" />
+
+            <!-- Logout Button -->
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

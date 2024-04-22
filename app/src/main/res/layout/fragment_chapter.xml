@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_chapterAssessments"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_chapterAssessments"
     tools:context=".ui.quiz.Chapter">
 
     <ScrollView
@@ -19,7 +19,6 @@
             android:fitsSystemWindows="true"
             android:orientation="vertical"
             android:padding="30dp">
-
 
             <TextView
                 android:id="@+id/textView104"
@@ -42,7 +41,7 @@
             <LinearLayout
                 android:id="@+id/buttonContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <Button
