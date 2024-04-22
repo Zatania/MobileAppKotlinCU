@@ -58,7 +58,6 @@ interface APIService {
         @Header("Authorization") token: String
     ) : Response<ChapterAssessmentResponseMain>
 
-    @Headers("Content-Type: application/json")
     @Multipart
     @POST("user/upload/{username}")
     suspend fun uploadImage(
@@ -80,6 +79,17 @@ interface APIService {
         @Header("Authorization") token: String,
     ) : Response<List<Progress>>
 
+    @Headers("Content-Type: application/json")
+    @GET("user/fetch/completed")
+    suspend fun getCompleted(
+        @Header("Authorization") token: String,
+    ) : Response<List<Completed>>
+
+    @Headers("Content-Type: application/json")
+    @GET("user/fetch/unlocked")
+    suspend fun getUnlocked(
+        @Header("Authorization") token: String,
+    ) : Response<List<Unlocked>>
 
     @Headers("Content-Type: application/json")
     @GET("programming-language/fetch")
@@ -128,4 +138,32 @@ interface APIService {
         @Header("Authorization") token: String,
         @Path("username") username: String
     ) : Response<List<ProgressUser>>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/progress/update")
+    suspend fun updateProgress(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    )
+
+    @Headers("Content-Type: application/json")
+    @GET("user/{username}/chapass")
+    suspend fun getUserChapAss(
+        @Header("Authorization") token: String,
+        @Path("username") username: String
+    ) : Response<List<ChapAss>>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/checkStatus")
+    suspend fun getStatusID(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<ResponseBody>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/exam/create")
+    suspend fun createExam(
+        @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
+    ) : Response<ResponseBody>
 }

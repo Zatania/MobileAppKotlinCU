@@ -15,7 +15,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nav.R
-import com.example.nav.databinding.FragmentLessonViewBinding
+import com.example.nav.services.ChapAss
 import com.example.nav.services.Chapter
 import com.example.nav.services.RetrofitClient
 import com.google.android.material.button.MaterialButton
@@ -28,8 +28,9 @@ import kotlinx.coroutines.launch
 
 class ChapterAssessment : Fragment() {
     private lateinit var chapAssContainer: ViewGroup
-    private lateinit var binding: FragmentLessonViewBinding
     private var selectedChoices: MutableMap<Int, Int> = mutableMapOf()
+    private lateinit var token: String
+    private lateinit var username: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +38,10 @@ class ChapterAssessment : Fragment() {
     ): View {
         val rootView = inflater.inflate(R.layout.fragment_chap_asses, container, false)
         chapAssContainer = rootView.findViewById(R.id.chapAssContainer)
+
+        val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        token = sharedPreferences.getString("token", "") ?: ""
+        username = sharedPreferences.getString("username", "") ?: ""
 
         setFragmentResultListener("chapterResultKey") { _, bundle ->
             val chapJSON = bundle.getString("chapterData")
@@ -74,6 +79,69 @@ class ChapterAssessment : Fragment() {
         }
 
         chapAssContainer.addView(chapAssTitle)
+
+        lifecycleScope.launch {
+            val response = RetrofitClient.instance.getUserChapAss("Bearer $token", username)
+
+            val responseBody = response.body()
+
+            if (response.isSuccessful && responseBody != null) {
+                responseBody.let {
+                    val chapAssData: List<ChapAss> = it
+
+                    val passedChaps = chapAssData.find { it.status == "Passed" && it.chapter_name == chapAss.chapter_name }
+                    val failedChaps = chapAssData.find { it.status == "Failed" && it.chapter_name == chapAss.chapter_name }
+
+                    if (passedChaps != null) {
+                        val messageTextView = context?.let {
+                            MaterialTextView(it).apply {
+                                text = "You have passed this assessment with a score of ${passedChaps.latest_score} / ${passedChaps.total_items} last attempted on ${passedChaps.last_attempt}"
+                                textSize = 10f
+                                textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                setTextColor(ContextCompat.getColor(context, R.color.green))
+                                layoutParams = LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                ).apply {
+                                    setMargins(
+                                        0,
+                                        0,
+                                        0,
+                                        resources.getDimensionPixelSize(R.dimen.lessons_margin_bottom)
+                                    )
+                                }
+                            }
+                        }
+
+                        chapAssContainer.addView(messageTextView)
+                    } else if (failedChaps != null) {
+                        val messageTextView = context?.let {
+                            MaterialTextView(it).apply {
+                                text = "You have failed this assessment with a score of ${failedChaps.latest_score} / ${failedChaps.total_items} last attempted on ${failedChaps.last_attempt}. Please try again."
+                                textSize = 10f
+                                textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                setTextColor(ContextCompat.getColor(context, R.color.red))
+                                layoutParams = LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                ).apply {
+                                    setMargins(
+                                        0,
+                                        0,
+                                        0,
+                                        resources.getDimensionPixelSize(R.dimen.lessons_margin_bottom)
+                                    )
+                                }
+                            }
+                        }
+
+                        chapAssContainer.addView(messageTextView)
+                    }
+                }
+            }   else {
+                Toast.makeText(requireContext(), "Failed to fetch chapter assessment", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         for (question in chapAss.chapter_assessment) {
             // Create TextView for the question
@@ -185,7 +253,7 @@ class ChapterAssessment : Fragment() {
             RetrofitClient.instance.createProgress("Bearer $token", requestBody)
         }
 
-        if (percentageScore >= 70) {
+        if (percentageScore >= 75) {
             Toast.makeText(requireContext(), "Congratulations! You passed the assessment!", Toast.LENGTH_SHORT).show()
             lifecycleScope.launch {
                 val requestBody = JsonObject().apply {
@@ -205,23 +273,39 @@ class ChapterAssessment : Fragment() {
                     val firstLessonID = responseLesson.body()?.first_lesson_id
 
                     if (responseLesson.isSuccessful && firstLessonID != null) {
-                        val requestBodyProgress = JsonObject().apply {
+                        val checkStatusBody = JsonObject().apply {
                             addProperty("user_id", userID)
-                            addProperty("completion_status", "inprogress")
-                            addProperty("lesson_id", firstLessonID)
                             addProperty("chapter_id", nextChapterID)
+                            addProperty("lesson_id", firstLessonID)
                         }
-                        val responseProgress = RetrofitClient.instance.createProgress(
-                            "Bearer $token",
-                            requestBodyProgress
-                        )
-
-                        if (responseProgress.isSuccessful) {
+                        val checkChapterandLessonID = RetrofitClient.instance.getStatusID("Bearer $token", checkStatusBody)
+                        if (checkChapterandLessonID.isSuccessful) {
                             Toast.makeText(
                                 requireContext(),
                                 "Congratulations! You have completed the chapter. You can now proceed to the next chapter.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                        } else {
+                            val requestBodyProgress = JsonObject().apply {
+                                addProperty("user_id", userID)
+                                addProperty("completion_status", "inprogress")
+                                addProperty("lesson_id", firstLessonID)
+                                addProperty("chapter_id", nextChapterID)
+                            }
+                            val responseProgress = RetrofitClient.instance.createProgress(
+                                "Bearer $token",
+                                requestBodyProgress
+                            )
+
+                            if (responseProgress.isSuccessful) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Congratulations! You have completed the chapter. You can now proceed to the next chapter.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(requireContext(), "Failed to create progress", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     } else {
                         Toast.makeText(requireContext(), "Failed to fetch last lesson", Toast.LENGTH_SHORT).show()
@@ -230,24 +314,13 @@ class ChapterAssessment : Fragment() {
                     Toast.makeText(requireContext(), "Failed to fetch next chapter", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            Toast.makeText(requireContext(), "Assessment submitted!", Toast.LENGTH_SHORT).show()
-
-            Toast.makeText(requireContext(), "Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
-
-            println("Score for Chapter $chap_reference_number: $score / $totalQuestions (${percentageScore}% correct)")
+            Toast.makeText(requireContext(), "Assessment submitted! Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
 
             selectedChoices.clear()
 
             findNavController().navigate(R.id.navigation_lesson)
         } else {
-            Toast.makeText(requireContext(), "Sorry, you did not pass the assessment. Please try again.", Toast.LENGTH_SHORT).show()
-
-            Toast.makeText(requireContext(), "Assessment submitted!", Toast.LENGTH_SHORT).show()
-
-            Toast.makeText(requireContext(), "Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
-
-            println("Score for Chapter $chap_reference_number: $score / $totalQuestions (${percentageScore}% correct)")
+            Toast.makeText(requireContext(), "Sorry, you did not pass the assessment. Please try again to unlock next chapter. Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
 
             selectedChoices.clear()
 

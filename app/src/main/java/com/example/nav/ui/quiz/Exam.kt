@@ -33,6 +33,9 @@ import kotlinx.coroutines.launch
 class Exam : Fragment() {
     private lateinit var examContainer: ViewGroup
     private var selectedChoices: MutableMap<Int, Int> = mutableMapOf()
+    private lateinit var username : String
+    private lateinit var token : String
+    private var user_id : Int = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +43,11 @@ class Exam : Fragment() {
     ): View {
         val rootView = inflater.inflate(R.layout.fragment_exam, container, false)
         examContainer = rootView.findViewById(R.id.examContainer)
+
+        val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        username = sharedPreferences.getString("username", "") ?: ""
+        token = sharedPreferences.getString("token", "") ?: ""
+        user_id = sharedPreferences.getInt("id", 0)
 
         setFragmentResultListener("programmingLanguageDataKey") { _, bundle ->
             val examJson = bundle.getString("examData")
@@ -177,46 +185,64 @@ class Exam : Fragment() {
 
     }
 
-    private fun submitAnswers(programmingLanguage: List<ProgrammingLanguage>) {
-        programmingLanguage.let { response ->
-            for(progLang in response){
-                var score = 0 // Initialize score
-                val totalQuestions = progLang.exams.size
-                val chapName = "Exam"
-                for(exam in progLang.exams) {
+    private fun submitAnswers(programmingLanguages: List<ProgrammingLanguage>) {
+        val totalQuestions = programmingLanguages.sumOf { it.exams.size }
+        var score = 0 // Initialize total score\
 
-                    // Check if the selected choice matches the correct answer
-                    val selectedChoice = selectedChoices[exam.question_number]
-                    if (selectedChoice != null && selectedChoice == exam.correct_answer) {
-                        score++ // Increment score for correct answer
-                    }
-
-                    // Calculate percentage score
-                    val percentageScore = (score.toFloat() / totalQuestions.toFloat()) * 100
-
-                    val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
-                    val username = sharedPreferences.getString("username", "")
-                    val token = sharedPreferences.getString("token", "")
-
-                    lifecycleScope.launch {
-                        val requestBody = JsonObject().apply {
-                            addProperty("username", username)
-                            addProperty("score", score)
-                        }
-                        RetrofitClient.instance.createProgress("Bearer $token", requestBody)
-                    }
-
-                    Toast.makeText(requireContext(), "Exam submitted!", Toast.LENGTH_SHORT).show()
-
-                    Toast.makeText(requireContext(), "Score for $chapName: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
-
-                    println("Score for Exam: $score / $totalQuestions (${percentageScore}% correct)")
-
-                    selectedChoices.clear()
-
-                    findNavController().navigate(R.id.navigation_lesson)
+        programmingLanguages.forEach { programmingLanguage ->
+            programmingLanguage.exams.forEach { exam ->
+                // Check if the selected choice matches the correct answer
+                val selectedChoice = selectedChoices[exam.question_number]
+                if (selectedChoice != null && selectedChoice == exam.correct_answer) {
+                    score++ // Increment score for correct answer
                 }
             }
+        }
+
+        // Calculate percentage score
+        val percentageScore = (score.toFloat() / totalQuestions.toFloat()) * 100
+
+        lifecycleScope.launch {
+            val requestBody = JsonObject().apply {
+                addProperty("user_id", user_id)
+                addProperty("score", score)
+            }
+
+            RetrofitClient.instance.createExam("Bearer $token", requestBody)
+        }
+
+        if (percentageScore >= 75) {
+            Toast.makeText(
+                requireContext(),
+                "Congratulations! You have passed the exam.",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            lifecycleScope.launch {
+                val requestBody = JsonObject().apply {
+                    addProperty("username", username)
+                    addProperty("badge_name", "Exam Badge")
+                }
+                RetrofitClient.instance.addBadge("Bearer $token", requestBody)
+            }
+
+            Toast.makeText(requireContext(), "Score for exam: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
+
+            selectedChoices.clear()
+
+            findNavController().navigate(R.id.navigation_lesson)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Sorry, you have failed the exam.",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            Toast.makeText(requireContext(), "Score for exam: $score / $totalQuestions (${percentageScore}% correct)", Toast.LENGTH_SHORT).show()
+
+            selectedChoices.clear()
+
+            findNavController().navigate(R.id.navigation_lesson)
         }
     }
 }

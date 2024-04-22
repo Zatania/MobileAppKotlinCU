@@ -21,9 +21,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nav.R
 import com.example.nav.services.ChaptersData
+import com.example.nav.services.Completed
 import com.example.nav.services.ProgrammingLanguage
 import com.example.nav.services.Progress
 import com.example.nav.services.RetrofitClient
+import com.example.nav.services.Unlocked
 import com.example.nav.ui.getting_started.GettingStartedFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
@@ -37,6 +39,8 @@ class LessonFragment : Fragment() {
     private var currentChapterLayout: View? = null
     private lateinit var lessonsContainer: ViewGroup
     private var inProgressChaptersData: List<Progress>? = null
+    private var completedChaptersData: List<Completed>? = null
+    private var unlockedChaptersData: List<Unlocked>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +58,8 @@ class LessonFragment : Fragment() {
         lessonsContainer.removeAllViews()
         lifecycleScope.launch {
             fetch(token)
-            fetchInProgress(token)
+            fetchCompleted(token)
+            fetchUnlocked(token)
             fetchProgrammingLanguageData(token)
         }
 
@@ -77,22 +82,24 @@ class LessonFragment : Fragment() {
         }
     }
 
-    private suspend fun fetchInProgress(token: String) {
-        val response = RetrofitClient.instance.getInProgress("Bearer $token")
-
-        if (response.isSuccessful) {
-            val responseBody = response.body()
-            responseBody?.let {
-                inProgressChaptersData = it
-                Log.d("LessonFragment", "In progress data: $inProgressChaptersData")
-
-            }
-        } else {
-            Toast.makeText(context, "Please start reading Getting Started.", Toast.LENGTH_SHORT).show()
+    private suspend fun fetchCompleted(token: String) {
+        val response = RetrofitClient.instance.getCompleted("Bearer $token")
+        
+        val responseBody = response.body()
+        
+        responseBody?.let {
+            completedChaptersData = it
         }
     }
 
+    private suspend fun fetchUnlocked(token: String) {
+        val response = RetrofitClient.instance.getUnlocked("Bearer $token")
 
+        val responseBody = response.body()
+        responseBody?.let {
+            unlockedChaptersData = it
+        }
+    }
 
     private suspend fun fetchProgrammingLanguageData(token: String) {
         // Fetch programming language data from the API
@@ -112,39 +119,39 @@ class LessonFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun displayFetchData(programmingLanguage: List<ProgrammingLanguage>?) {
 
-        fun countInProgress(chapterId: Int): Int {
+        fun countCompleted(chapterId: Int): Int {
             var totalLessons = 0
-            var inProgressLessons = 0
+            var completedLessons = 0
 
             programmingLanguage?.forEach { programmingLanguages ->
                 programmingLanguages.chapters.forEach { chapter ->
                     if (chapter.id == chapterId) {
                         totalLessons += chapter.lessons.size
                         chapter.lessons.forEach { lesson ->
-                            val lessonExists = inProgressChaptersData?.any { it.lesson_id == lesson.id }
+                            val lessonExists = completedChaptersData?.any { it.lesson_id == lesson.id }
                             if (lessonExists == true) {
-                                inProgressLessons++
+                                completedLessons++
                             }
                         }
                     }
                 }
             }
 
-            return inProgressLessons
+            return completedLessons
         }
 
         fun chapterLessons(chapterId: Int): Int {
             var totalLessons = 0
-            var inProgressLessons = 0
+            var completedLessons = 0
 
             programmingLanguage?.forEach { programmingLanguages ->
                 programmingLanguages.chapters.forEach { chapter ->
                     if (chapter.id == chapterId) {
                         totalLessons += chapter.lessons.size
                         chapter.lessons.forEach { lesson ->
-                            val lessonExists = inProgressChaptersData?.any { it.lesson_id == lesson.id }
+                            val lessonExists = unlockedChaptersData?.any { it.lesson_id == lesson.id }
                             if (lessonExists == true) {
-                                inProgressLessons++
+                                completedLessons++
                             }
                         }
                     }
@@ -229,7 +236,7 @@ class LessonFragment : Fragment() {
                         MaterialButton(it).apply {
                             text = chapter.chapter_name
                             textSize = 16f
-                            val chapterExists = inProgressChaptersData?.any { it.chapter_id == chapter.id }
+                            val chapterExists = unlockedChaptersData?.any { it.chapter_id == chapter.id }
                             isEnabled = chapterExists == true
                             setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
                             isAllCaps = false
@@ -271,7 +278,7 @@ class LessonFragment : Fragment() {
                                     MaterialButton(it).apply {
                                         text = lesson.lesson_number + " " + lesson.lesson_title
                                         textSize = 16f
-                                        val chapterExists = inProgressChaptersData?.any { it.lesson_id == lesson.id }
+                                        val chapterExists = unlockedChaptersData?.any { it.lesson_id == lesson.id }
                                         isEnabled = chapterExists == true
                                         setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
                                         isAllCaps = false
@@ -295,24 +302,20 @@ class LessonFragment : Fragment() {
                                         }
                                     }
                                 }
-                                chapterLayout?.addView(lessonButton)
+                                chapterLayout.addView(lessonButton)
                             }
 
                             // Check if chapter assessments exist
                             if (chapter.chapter_assessment.isNotEmpty()) {
                                 // Add chapter assessment button
                                 val chapLesson = chapterLessons(chapter.id)
-                                val inProgress = countInProgress(chapter.id)
+                                val completed = countCompleted(chapter.id)
 
                                 val chapterAssessmentButton = context?.let {
                                     MaterialButton(it).apply {
                                         text = chapter.chapter_name + " Assessment"
                                         textSize = 16f
-                                        if(chapLesson == inProgress) {
-                                            isEnabled = true
-                                        } else {
-                                            isEnabled = false
-                                        }
+                                        isEnabled = chapLesson == completed
                                         setBackgroundColor(
                                             ContextCompat.getColor(
                                                 context,

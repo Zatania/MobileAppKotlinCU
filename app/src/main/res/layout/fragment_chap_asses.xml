@@ -25,6 +25,15 @@
             android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="You have passed this exam with a score of 5. You can retake again if you want."
+            android:textColor="#4CAF50"
+            android:textSize="10sp" />
+
+        <TextView
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -142,6 +142,27 @@ data class Progress(
     val score: Double?
 )
 
+data class Completed(
+    val id: Int,
+    val user_id: Int,
+    val chapter_id: Int,
+    val lesson_id: Int,
+    val assessment_id: Int?,
+    val completion_status: String,
+    val score: Double?
+)
+
+data class Unlocked(
+    val id: Int,
+    val user_id: Int,
+    val chapter_id: Int,
+    val lesson_id: Int,
+    val assessment_id: Int?,
+    val completion_status: String,
+    val score: Double?
+)
+
+
 data class LessonID (
     val next_lesson_id: Int
 )
@@ -165,4 +186,16 @@ data class ProgressUser (
     val average_score: Float,
     val total_items: Int,
     val last_attempt: String
+)
+
+data class ChapAss(
+    val chapter_name: String,
+    val total_items: Int,
+    val latest_score: Int,
+    val last_attempt: String,
+    val status: String
+)
+
+data class statusID(
+    val message: String
 )

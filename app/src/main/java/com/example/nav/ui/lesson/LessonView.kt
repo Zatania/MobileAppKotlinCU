@@ -34,6 +34,8 @@ class LessonViewFragment : Fragment() {
     private lateinit var videoView: WebView
     private lateinit var token: String
     private var user_id: Int = 0
+    private lateinit var username: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +46,7 @@ class LessonViewFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
         token = sharedPreferences.getString("token", "") ?: ""
         user_id = sharedPreferences.getInt("id", 0)
+        username = sharedPreferences.getString("username", "") ?: ""
 
         setFragmentResultListener("lessonResultKey") { _, bundle ->
             val lessonJson = bundle.getString("lessonData")
@@ -69,14 +72,14 @@ class LessonViewFragment : Fragment() {
 
         val doneButton = context?.let {
             MaterialButton(it).apply {
-                text = "Done with Getting Started"
-                textSize = 12f
+                text = "Done"
+                textSize = 16f
                 isEnabled = true
                 setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
                 isAllCaps = false
-                textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                textAlignment = View.TEXT_ALIGNMENT_CENTER
                 layoutParams = LinearLayout.LayoutParams(
-                    resources.getDimensionPixelSize(R.dimen.done_button_width),
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
                     resources.getDimensionPixelSize(R.dimen.done_button_height)
                 )
                 (layoutParams as LinearLayout.LayoutParams).setMargins(0, resources.getDimensionPixelSize(R.dimen.button_margin_top), 0, 0)
@@ -100,7 +103,13 @@ class LessonViewFragment : Fragment() {
                                     val responseFinal = RetrofitClient.instance.createProgress("Bearer $token", requestBody)
 
                                     if (responseFinal.isSuccessful) {
-                                        // Handle success
+                                        val requestUpdateBody = JsonObject().apply {
+                                            addProperty("user_id", user_id)
+                                            addProperty("chapter_id", lesson.chapter_id)
+                                            addProperty("lesson_id", lesson.id)
+                                            addProperty("completion_status", "completed")
+                                        }
+                                        RetrofitClient.instance.updateProgress("Bearer $token", requestUpdateBody)
                                         Toast.makeText(context, "Lesson done. You can now proceed to next lesson.", Toast.LENGTH_SHORT).show()
                                         findNavController().navigate(R.id.navigation_lesson)
                                     } else {
@@ -110,7 +119,15 @@ class LessonViewFragment : Fragment() {
                                     Toast.makeText(context, "No next lesson found", Toast.LENGTH_SHORT).show()
                                 }
                             } else {
-                                Toast.makeText(context, "Failed to fetch next lesson", Toast.LENGTH_SHORT).show()
+                                val requestUpdateBody = JsonObject().apply {
+                                    addProperty("user_id", user_id)
+                                    addProperty("chapter_id", lesson.chapter_id)
+                                    addProperty("lesson_id", lesson.id)
+                                    addProperty("completion_status", "completed")
+                                }
+                                RetrofitClient.instance.updateProgress("Bearer $token", requestUpdateBody)
+                                Toast.makeText(context, "Lesson done. You can now proceed to next lesson.", Toast.LENGTH_SHORT).show()
+                                findNavController().navigate(R.id.navigation_lesson)
                             }
                         } catch (e: Exception) {
                             Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -121,7 +138,18 @@ class LessonViewFragment : Fragment() {
             }
         }
 
-        binding.viewLessonContainer.addView(doneButton)
+        lifecycleScope.launch {
+            val response = RetrofitClient.instance.getCompleted("Bearer $token")
+
+            val progress = response.body()
+
+            val isCompleted = progress?.any { it.chapter_id == lesson.chapter_id && it.lesson_id == lesson.id } == true
+
+            if (!isCompleted) {
+                // Add doneButton only if chapter id and lesson id combination is not completed
+                viewLessonContainer.addView(doneButton)
+            }
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")

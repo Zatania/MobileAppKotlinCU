@@ -162,14 +162,14 @@ class GettingStartedFragment : Fragment() {
 
         val doneButton = context?.let {
             MaterialButton(it).apply {
-                text = "Done with Getting Started"
-                textSize = 12f
+                text = "Done"
+                textSize = 16f
                 isEnabled = true
                 setBackgroundColor(ContextCompat.getColor(context, R.color.lb))
                 isAllCaps = false
-                textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                textAlignment = View.TEXT_ALIGNMENT_CENTER
                 layoutParams = LinearLayout.LayoutParams(
-                    resources.getDimensionPixelSize(R.dimen.done_button_width),
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
                     resources.getDimensionPixelSize(R.dimen.done_button_height)
                 )
                 (layoutParams as LinearLayout.LayoutParams).setMargins(0, resources.getDimensionPixelSize(R.dimen.button_margin_top), 0, 0)
@@ -194,6 +194,17 @@ class GettingStartedFragment : Fragment() {
             }
         }
 
-        gettingStartedContainer.addView(doneButton)
+        lifecycleScope.launch {
+            val response = RetrofitClient.instance.getUnlocked("Bearer $token")
+
+            val unlocked = response.body()
+
+            val isChapterLessonCompleted = unlocked?.any { it.chapter_id == ChapterID && it.lesson_id == LessonID } == true
+
+            if (!isChapterLessonCompleted) {
+                // Add doneButton only if chapter id and lesson id combination is not completed
+                gettingStartedContainer.addView(doneButton)
+            }
+        }
     }
 }

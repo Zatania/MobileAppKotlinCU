@@ -12,6 +12,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nav.R
+import com.example.nav.services.Completed
 import com.example.nav.services.RetrofitClient
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class EvaluationPage : Fragment() {
 
+    private var completedChaptersData: List<Completed>? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,13 +31,33 @@ class EvaluationPage : Fragment() {
 
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val token = sharedPreferences.getString("token", "") ?: ""
-
         lifecycleScope.launch {
+            fetchCompleted(token)
             val response = RetrofitClient.instance.getProgrammingLanguages("Bearer $token")
 
             if (response.isSuccessful) {
                 val programmingLanguage = response.body()
                 if (programmingLanguage != null) {
+
+                    var completedChapters = 0
+                    var totalChapters = 0
+
+                    programmingLanguage.forEach { programmingLanguages ->
+                        programmingLanguages.chapters.forEach { chapter ->
+                            totalChapters++
+                            val chapExists = completedChaptersData?.any { it.chapter_id == chapter.id }
+                            if (chapExists == true) {
+                                completedChapters++
+                            }
+                        }
+                    }
+
+                    if (completedChapters == totalChapters) {
+                        buttonStartExam.isEnabled = true
+                    } else {
+                        buttonStartExam.isEnabled = false
+                    }
+
                     buttonStartExercise.setOnClickListener {
                         // Navigate to the exam fragment
                         val gson = Gson()
@@ -62,6 +84,16 @@ class EvaluationPage : Fragment() {
             }
         }
         return rootView
+    }
+    private suspend fun fetchCompleted(token: String) {
+        val response = RetrofitClient.instance.getCompleted("Bearer $token")
+
+        val responseBody = response.body()
+
+        responseBody?.let {
+            completedChaptersData = it
+            Log.d("ChapterFragment", "Completed chapters: $completedChaptersData")
+        }
     }
 }
 

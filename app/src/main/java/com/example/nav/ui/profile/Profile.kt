@@ -21,6 +21,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -43,7 +44,7 @@ import java.io.OutputStream
 
 
 class ProfileFragment : Fragment() {
-    private lateinit var imageView: ImageView
+    private lateinit var profileView: ImageView
     private lateinit var badgesContainer: ViewGroup
     private lateinit var username: String
     private lateinit var token: String
@@ -83,18 +84,20 @@ class ProfileFragment : Fragment() {
         feedbackButton.setOnClickListener {
             openFeedbackForm()
         }
-        
-        imageView = view.findViewById(R.id.imageView)
+
+        profileView = view.findViewById(R.id.imageView)
+        profileView.setOnClickListener {
+            selectImage()
+        }
         lifecycleScope.launch {
             val response = RetrofitClient.instance.getProfile("Bearer $token",username)
 
             if(response.isSuccessful){
                 val profile = response.body()?.string()
-                Picasso.get().load(profile).into(imageView)
+                Picasso.get().load(profile).into(profileView)
+            } else {
+                Picasso.get().load("https://www.gravatar.com/avatar/").into(profileView)
             }
-        }
-        imageView.setOnClickListener {
-            openImageSelectionDialog()
         }
 
         return view
@@ -108,6 +111,57 @@ class ProfileFragment : Fragment() {
             val badges = response.body()
             displayBadges(badges)
         }
+    }
+
+    private fun selectImage() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        resultLauncher.launch(intent)
+    }
+
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val selectedImageUri: Uri? = data?.data
+            selectedImageUri?.let {
+                uploadImage(it)
+            }
+        }
+    }
+
+    private fun uploadImage(imageUri: Uri) {
+        val file = File(requireContext().cacheDir, "temp_image.jpg")
+        file.createNewFile()
+
+        val inputStream = requireContext().contentResolver.openInputStream(imageUri)
+        val outputStream = FileOutputStream(file)
+        inputStream?.copyTo(outputStream)
+        inputStream?.close()
+        outputStream.close()
+
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val imagePart = MultipartBody.Part.createFormData("image", file.name, requestBody)
+
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.instance.uploadImage("Bearer $token", username, imagePart)
+                if (response.isSuccessful) {
+                    // Image uploaded successfully
+                    Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
+                    // Refresh profile picture
+                    loadImageFromUri(imageUri)
+                } else {
+                    // Handle error
+                    Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Handle exception
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun loadImageFromUri(imageUri: Uri) {
+        profileView.setImageURI(imageUri)
     }
 
     private fun displayBadges(badgesResponse: List<BadgesResponse>?) {
@@ -147,45 +201,11 @@ class ProfileFragment : Fragment() {
         startActivity(browserIntent)
     }
 
-    @SuppressLint("IntentReset")
-    private fun openImageSelectionDialog() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            type = "image/*"
-            addCategory(Intent.CATEGORY_OPENABLE)
-        }
-        startActivityForResult(intent, Companion.REQUEST_IMAGE_OPEN)
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == Activity.RESULT_OK) {
             val fileUri = data?.data
             Toast.makeText(requireContext(), "Image selected: $fileUri", Toast.LENGTH_SHORT).show()
-        }
-    }
-    private fun uploadFile(file: File) {
-        lifecycleScope.launch {
-            try {
-                val requestFile: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-                val body: MultipartBody.Part = MultipartBody.Part.createFormData("image", file.name, requestFile)
-
-                // Upload the file using Retrofit
-                val response = RetrofitClient.instance.uploadImage("Bearer $token", username, body)
-
-                // Handle response
-                if (response.isSuccessful) {
-                    // File uploaded successfully
-                    Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
-                    // Reload profile image or handle UI update
-                } else {
-                    // Handle error
-                    Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
-                    Log.d("ProfileFragment", "Failed to upload image: ${response.errorBody()?.string()}")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
         }
     }
     companion object {
