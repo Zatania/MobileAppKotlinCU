@@ -285,6 +285,26 @@ class ChapterAssessment : Fragment() {
                                 "Congratulations! You have completed the chapter. You can now proceed to the next chapter.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            val requestBodyProgress = JsonObject().apply {
+                                addProperty("user_id", userID)
+                                addProperty("completion_status", "inprogress")
+                                addProperty("lesson_id", firstLessonID)
+                                addProperty("chapter_id", nextChapterID)
+                            }
+                            val responseProgress = RetrofitClient.instance.createProgress(
+                                "Bearer $token",
+                                requestBodyProgress
+                            )
+
+                            if (responseProgress.isSuccessful) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Congratulations! You have completed the chapter. You can now proceed to the next chapter.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(requireContext(), "Failed to create progress", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
                             val requestBodyProgress = JsonObject().apply {
                                 addProperty("user_id", userID)

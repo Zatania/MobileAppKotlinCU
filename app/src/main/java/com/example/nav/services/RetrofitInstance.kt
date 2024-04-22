@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://codesunleash-aee6eed5bd11.herokuapp.com/api/"
+    private const val BASE_URL = "http://192.168.1.5/api/"
 
     // Create an OkHttpClient with interceptors
     private val okHttpClient = OkHttpClient.Builder()
