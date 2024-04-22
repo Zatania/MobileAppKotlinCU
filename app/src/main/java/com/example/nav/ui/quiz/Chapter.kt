@@ -25,6 +25,7 @@ import com.example.nav.services.StepsDetails
 import com.example.nav.services.Unlocked
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 
@@ -42,10 +43,11 @@ class Chapter : Fragment() {
 
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", 0)
         val token = sharedPreferences.getString("token", "") ?: ""
+        val user_id = sharedPreferences.getInt("id", 0)
 
         lifecycleScope.launch {
-            fetchCompleted(token)
-            fetchUnlocked(token)
+            fetchCompleted(token, user_id)
+            fetchUnlocked(token, user_id)
             setFragmentResultListener("programmingLanguageDataKey") { _, bundle ->
                 val progamJson = bundle.getString("chapterAssessmentData")
                 val programData = Gson().fromJson<List<ProgrammingLanguage>>(progamJson, object : TypeToken<List<ProgrammingLanguage>>() {}.type)
@@ -56,8 +58,11 @@ class Chapter : Fragment() {
         return rootView
     }
 
-    private suspend fun fetchCompleted(token: String) {
-        val response = RetrofitClient.instance.getCompleted("Bearer $token")
+    private suspend fun fetchCompleted(token: String, user_id: Int) {
+        val requestBody = JsonObject().apply {
+            addProperty("user_id", user_id)
+        }
+        val response = RetrofitClient.instance.getCompleted("Bearer $token", requestBody)
 
         val responseBody = response.body()
 
@@ -67,8 +72,11 @@ class Chapter : Fragment() {
         }
     }
 
-    private suspend fun fetchUnlocked(token: String) {
-        val response = RetrofitClient.instance.getUnlocked("Bearer $token")
+    private suspend fun fetchUnlocked(token: String, user_id: Int) {
+        val requestBody = JsonObject().apply {
+            addProperty("user_id", user_id)
+        }
+        val response = RetrofitClient.instance.getUnlocked("Bearer $token", requestBody)
 
         val responseBody = response.body()
         responseBody?.let {

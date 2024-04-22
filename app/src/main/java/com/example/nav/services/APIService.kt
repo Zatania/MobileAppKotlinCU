@@ -74,21 +74,24 @@ interface APIService {
     ) : Response<ResponseBody>
 
     @Headers("Content-Type: application/json")
-    @GET("user/fetch/inprogress")
+    @POST("user/fetch/inprogress")
     suspend fun getInProgress(
         @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
     ) : Response<List<Progress>>
 
     @Headers("Content-Type: application/json")
-    @GET("user/fetch/completed")
+    @POST("user/fetch/completed")
     suspend fun getCompleted(
         @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
     ) : Response<List<Completed>>
 
     @Headers("Content-Type: application/json")
-    @GET("user/fetch/unlocked")
+    @POST("user/fetch/unlocked")
     suspend fun getUnlocked(
         @Header("Authorization") token: String,
+        @Body requestBody: JsonObject
     ) : Response<List<Unlocked>>
 
     @Headers("Content-Type: application/json")

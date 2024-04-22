@@ -195,7 +195,10 @@ class GettingStartedFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            val response = RetrofitClient.instance.getUnlocked("Bearer $token")
+            val requestBody = JsonObject().apply {
+                addProperty("user_id", user_id)
+            }
+            val response = RetrofitClient.instance.getUnlocked("Bearer $token", requestBody)
 
             val unlocked = response.body()
 

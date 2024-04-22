@@ -140,7 +140,10 @@ class LessonViewFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            val response = RetrofitClient.instance.getCompleted("Bearer $token")
+            val requestBody = JsonObject().apply {
+                addProperty("user_id", user_id)
+            }
+            val response = RetrofitClient.instance.getCompleted("Bearer $token", requestBody)
 
             val progress = response.body()
 

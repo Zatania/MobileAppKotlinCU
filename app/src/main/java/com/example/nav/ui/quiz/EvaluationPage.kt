@@ -16,6 +16,7 @@ import com.example.nav.services.Completed
 import com.example.nav.services.RetrofitClient
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 
 class EvaluationPage : Fragment() {
@@ -31,8 +32,9 @@ class EvaluationPage : Fragment() {
 
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val token = sharedPreferences.getString("token", "") ?: ""
+        val user_id = sharedPreferences.getInt("id", 0)
         lifecycleScope.launch {
-            fetchCompleted(token)
+            fetchCompleted(token, user_id)
             val response = RetrofitClient.instance.getProgrammingLanguages("Bearer $token")
 
             if (response.isSuccessful) {
@@ -85,8 +87,11 @@ class EvaluationPage : Fragment() {
         }
         return rootView
     }
-    private suspend fun fetchCompleted(token: String) {
-        val response = RetrofitClient.instance.getCompleted("Bearer $token")
+    private suspend fun fetchCompleted(token: String, user_id: Int) {
+        val requestBody = JsonObject().apply {
+            addProperty("user_id", user_id)
+        }
+        val response = RetrofitClient.instance.getCompleted("Bearer $token", requestBody)
 
         val responseBody = response.body()
 

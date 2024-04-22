@@ -58,8 +58,8 @@ class LessonFragment : Fragment() {
         lessonsContainer.removeAllViews()
         lifecycleScope.launch {
             fetch(token)
-            fetchCompleted(token)
-            fetchUnlocked(token)
+            fetchCompleted(token, user_id)
+            fetchUnlocked(token, user_id)
             fetchProgrammingLanguageData(token)
         }
 
@@ -82,8 +82,11 @@ class LessonFragment : Fragment() {
         }
     }
 
-    private suspend fun fetchCompleted(token: String) {
-        val response = RetrofitClient.instance.getCompleted("Bearer $token")
+    private suspend fun fetchCompleted(token: String, user_id: Int) {
+        val requestBody = JsonObject().apply {
+            addProperty("user_id", user_id)
+        }
+        val response = RetrofitClient.instance.getCompleted("Bearer $token", requestBody)
         
         val responseBody = response.body()
         
@@ -92,8 +95,11 @@ class LessonFragment : Fragment() {
         }
     }
 
-    private suspend fun fetchUnlocked(token: String) {
-        val response = RetrofitClient.instance.getUnlocked("Bearer $token")
+    private suspend fun fetchUnlocked(token: String, user_id: Int) {
+        val requestBody = JsonObject().apply {
+            addProperty("user_id", user_id)
+        }
+        val response = RetrofitClient.instance.getUnlocked("Bearer $token", requestBody)
 
         val responseBody = response.body()
         responseBody?.let {
